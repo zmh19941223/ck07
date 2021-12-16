@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+   db:
+     image: mariadb
+     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+     volumes:
+       - mysql_db:/var/lib/mysql
+     environment:
+      MYSQL_ROOT_PASSWORD: pythonvip
+      MYSQL_DATABASE: dev04_dj
+     deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == manager
+
+   django_app:
+     depends_on:
+       - db
+     image: keyou1/django_app:v4
+     volumes:
+       - logs:/usr/src/app/logs/
+       - django_code:/usr/src/app/Dev04/
+     deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+   web:
+     depends_on:
+       - django_app
+     image: keyou1/front_end:v4
+     ports:
+       - "8866:80"
+       - "8800:8000"
+     volumes:
+       - logs:/var/log/nginx/
+     deploy:
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+
+volumes:
+    mysql_db:
+    django_code:
+    logs:

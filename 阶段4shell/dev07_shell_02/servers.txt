@@ -1,0 +1,5 @@
+server1 114.114.114.114
+server2 8.8.8.8
+server3 www.baidu.com
+server4 8.8.4.4
+server5 xxxxx

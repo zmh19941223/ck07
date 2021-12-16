@@ -1,0 +1,4 @@
+no      name score denger            age
+001 keyou    18    1         28    1 aa bb fdd
+   002      buyu       99      1  18 fsfsf
+        003     lemon       60     0      18 fsf
