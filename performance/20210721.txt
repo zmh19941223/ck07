@@ -1,0 +1,70 @@
+# 20210721白板
+
++ 回顾
+  + CICD： Jenkins + jmeter + ant
+    + Jenkins： 持续集成 持续交付的典型工具
+    + ant： 打包、编译、测试
+      + **重点难点**：build.xml文件配置
+    + jmeter： 性能测试脚本 jmx
+    + svn、git
+  + jenkins安装：
+    + jdk：1.8
+    + tomcat + Jenkins.war +os(windows\linux\mac)
+    + 默认端口： 8080
+    + 用户名/.jenkins
+      + jenkins 改成国内源
+    + 安装ant插件
+    + Jenkins的访问地址： http://jenkins_ip:8080/jenkins
+    + 确保 ant插件已经安装
+    + 配置ant本地路径
+    + 新建item
+      + 构建： invoke ant
+        + 高级配置： 一定要选择你的jmeter的extas文件夹中的build.xml
+  + 配置本地ant
+    + 配置ANT_HOME 环境变量
+    + 修改jmeter的jmeter.properties 中，有个output_format
+      + jmeter.save.saveservice.output_format=xml
+    + jmeter的extras文件夹中 ant-jmeter-1.1.1.jar  拷贝到ant的lib文件  ----发邮件
+  + build.xml
+    + project:  有且仅有一个
+      + default=all   默认情况下，会执行任务名称为all的任务，all的任务，它包含了test、report、mail  也就是说，默认情况下，会执行测试入围、生成报告任务、发送邮件任务。
+      + 在jenkins的item中配置  构建 invoke ant中 也有targets， 如果这个targets没有填，那么就根据build.xml文件中default值来执行，如果有填，就执行你填写的任务。如果targets 如果想要填多个，点击右侧 下三角图标，然后 回车换行的方式填写多个。
+  + jenkins构建
+    + 开始构建之前： 
+      + 先启动项目
+      + 检查jmx中的启用的线程组场景设计的
+
+CICD
+
+
+
+动手  CICD 
+
+
+
+全链路
+
+
+
+知识梳理
+
+jmeter脚本开发
+
+jmeter的场景设计
+
+jmeter的监控
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+# 202010823白板
+
++ 回顾：
+
+  + tomcat配置文件
+    + 堆栈：
+      + bin文件夹中 catalina.sh文件
+      + JAVA_OPTS 堆栈信息
+    + 端口\线程池
+      + conf文件夹  sever.xml文件
+      + 修改port
+      + 线程池
+
++ grafana+prometheus 监控tomcat
+
+  + jvm_exporter
+    + [Central Repository: io/prometheus/jmx/jmx_prometheus_javaagent/0.16.1 (maven.org)](https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.16.1/)
+  + 放到tomcat的bin文件夹
+  + tomcat.yml 文件也上传到tomcat的bin文件夹中
+  + 修改 catalina.sh文件
+
+  ```
+  JAVA_OPTS="-javaagent:./jmx_prometheus_javaagent-0.16.1.jar=3088:./tomcat.yml"
+  ```
+
+  + 重启动 grafana
+
+  ```
+  systemctl restart grafana-server
+  ```
+
+  
+
+  + 修改prometheus.yml
+
+  ```
+  
+    - job_name: 'jvm_exporter'
+      static_configs:
+      - targets: ['192.168.3.41:3088']
+  
+  ```
+
+  
+
+  + 启动prometheus
+  + 浏览器访问 http://grafana_ip:3000
+    + 添加prometheus的数据源
+  + 引入模板： 8563  3457
+
++ nginx
+
+  + 反向代理、域名服务器、web服务器
+  + nginx的安装(一)
+
+```
+yum install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel -y
+
+# 安装必须的pcre
+wget https://sourceforge.net/projects/pcre/files/pcre/8.44/pcre-8.44.tar.gz
+
+tar -xzvf pcre-8.44.tar.gz
+
+cd pcre-8.44
+
+./configure
+
+make && make install
+```
+
+
+
++ 安装nginx
+
+```
+wget http://nginx.org/download/nginx-1.19.5.tar.gz
+
+tar -xzvf nginx-1.19.5.tar.gz
+
+cd nginx-1.19.5
+
+./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
+
+make && make install
+```
+
+
+
+启动nginx的命令： `/usr/local/nginx/sbin/nginx`
+
+配置文件地址： /usr/local/nginx/conf/nginx.conf
+
+检查nginx的配置文件是否正常： `/usr/local/nginx/sbin/nginx -t`
+
+重新加载配置文件`/usr/local/nginx/sbin/nginx -s reload`
+
+
+
+
+
++ 安装nginx方法2：
+
+  + 安装对于操作系统的nginx源
+
+  ```
+  rpm install http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm -y
+  yum install nginx -y
+  
+  systemctl restart\stop\status nginx
+  
+  # 检查配置文件是否正常
+  nginx -t
+  
+  # 重新家族nginx的配置文件
+  nginx -s reload
+  
+  #配置文件地址
+  /etc/nginx/nginx.conf
+  ```
+
+  
+
++ 两种方式优缺点： 
+  + 第1种，源码安装， 安装比较麻烦一点，但是可以灵活配置，**方便后续进行功能扩展**
+  + 第2种，yum来安装，这种安装简单，但是，**后续无法进行功能扩展。**
+
+
+
++ 用nginx来配置一个集群
+  + 我上课用的是  一台电脑种配置了多个tomcat
+  + 修改一个tomcat种的server.xml文件
+    + 2个tomcat， 一个tomcat端口 8080   另一个tomcat的端口 8880
+    + ip有几个？

@@ -1,0 +1,95 @@
+# 20210903白板
+
++ mysql数据库的优化
+  + 获取慢sql？
+    + show variables like '%slow_%'
+      + slow_query_log   确认这个的值  是否为 ON    默认是OFF
+    + 找mysql的配置文件
+      + 系统直接安装mysql    /etc/my.cnf
+      + 如果是用docker方式安装， 配置文件的路径
+    + 修改配置文件： 
+      + slow_query_log=ON    开启慢查询的开关
+      + long_query_time=1   设置慢查询的阈值，1，代表1s，当sql的执行时间超过1s时，就认为时慢sql，这个时候慢sql，就会默认自动写慢sql的日志文件中
+    + 重启动mysql
+      + 系统直接安装的mysql启动：systemctl restart mysqld
+      + docker方式安装的启动： docker restart  容器名称
+    + 运行性能测试脚本
+      + 观察 响应时间，看平均响应时间，是否超过上面设置的阈值。 也就时说，在运行过程中，响应时间一定要出现了超过阈值的时间，才可能出现慢sql。
+    + 拿到慢sql的文件，里面就有慢sql
+
++ 分析慢sql，只是数据库表层面的优化的一种。
+
++ 数据库表层面的优化：
+
+  + 建表的时候： 存储引擎选择
+  + 建表的时候，表字段数量
+  + 查表方式： 垂直拆表、水平拆表
+  + 表字段： 索引   数据量比较大时，有索引和没有索引，在查询数据上时有差异的。
+
++ 表优化：
+
+  + 慢sql的优化： 找到sql语句
+  + explain  sql语句  -----分析你的sql
+    + id: 编号
+    + select_type: 查询类型
+    + table: 表
+    + type: 类型
+    + possible_keys: 预测用到的索引
+    + key: 实际用到的索引
+    + key_len: 使用的索引长度
+    + ref:  表之间的匹配条件
+    + rows：行数    在sql语句执行时，使用了多少行数据
+    + extra： 额外的   在这个里面会告诉你，我们脚本是否有使用条件
+
+  + id：id值大 先被执行；id相同的，执行顺序从上往下
+  + select_type: 查询类型，种类有多种
+    + PRIMARY：查询中包含复杂的子查询，最外层的select被标记为PRIMARY
+    + SUBQUERY：子查询的第一个select
+    + SIMPLE：简单的SELECT，不使用union或子查询
+    + UNION：union中第二个或后面的select语句
+    + DEPENDENT UNION： union中的第二个或后面的select语句，取决于外面的查询
+    + UNION RESULT: union的结果
+    + DEPENDENT SUBQUERY：子查询中的第一个select，取决于外面的查询
+    + DERIVED：衍生查询，使用了临时表(select、from子句的子查询)
+    + UNCACHEABLE SUBQUERY： 一个子查询的结果不能被缓存，必须重新评估外链接的第一行
+  + **type：** 查询的类型，也是有多种值
+    + system:
+    + const：
+    + eq_ref：类似ref，只是使用的索引为唯一索引
+    + ref：使用了索引列上值进行查询
+    + range：使用一个索引来检索给定范围的行
+    + index：索引 遍历索引数据Full index scan
+    + ALL  :  全表扫描，你要找数据，要全表查找。
+    + 性能效率：<font color="red">**system > const > eq_ref > ref > range > index > all 左边效率高于右边**</font>
+
+  + key:  脚本真正用到索引
+  + rows:  总共查询了多少行
+  + extra：
+    + using where：显示的字段，不在索引
+    + Using index： 使用了索引，不 用回表查询，能够起到性能提升
+    + Using temporary： 使用了临时表，性能消耗比较大，常见于group by语句
+    + Using filesort：使用文件排序，无法利用索引完成排序操作，性能消耗非常大
+    + Using join buffer：mysql引擎使用了连接缓存
+    + Impossible where: where子句永远为false
+    + Select tables optimized away：仅通过使用索引，优化器可能仅从聚合函数结果中返回一行
+
+  + sql优化：
+    + on语句时， 左边小表、右边大表
+    + where 字段尽可能使用  索引
+    + where 后面有in语句，建议放在索引字段后面
+    + where  条件使用like模糊查询，  不要用模糊匹配开头
+    + where 条件 多个  尽可能不要使用or   
+
++ mysql数据库的监控
+
+  + 方法1
+
+  + 方法2： docker方式来安装 mysqld_exporter
+
+    ```
+    docker run -itd --name kyj_mysqld_exporter -p 9404:9104 -e DATA_SOURCE_NAME="root:123456@(192.168.3.41:3337)" prom/mysqld-exporter
+    ```
+
+    
+
+​	

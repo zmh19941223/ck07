@@ -1,0 +1,43 @@
+# 20210813白板
+
++ 内存
+
+  + 扇区扇区sector：磁盘组成的最小单元(512b)，磁盘磁道中一个弧段
+
+  + 块Block：操作系统与**磁盘数据**交换的**最小单位**，块=2n x 扇区
+
+    Ølinux：类似Ext4文件系统，就是磁盘分块
+
+    Øwindows：类似NTFS文件系统，也是块，只是被叫做‘簇’
+
+  + 页page：操作系统与**内存数据**交换的**最小单位**  一页的大小，一般是4K
+  + 缓冲区buffer:
+
++ 磁盘阵列RAID:
+  + RAID0: 数据分片存在2块磁盘，**读写速度**提升2倍，但是，数据没有冗余，万一数据出错，很难恢复
+  + RAID1：相同数据冗余存入2块磁盘，**写**速度不变，**读**速度提升2倍，数据有冗余，恢复数据很简单
+  + RAID5：数据分片和校验码混合存储3份，**读写速度提升2倍**，数据没有冗余，但是有校验，数据恢复时，比较容易。
+  + RAID10：2块磁盘1组先做RAID1，多组RAID1，再做RAID0。读写速度N倍 n为组数
+
++ 测试磁盘**写**的速度
+  + 1、先清空缓存： `echo 3 >/proc/sys/vm/drop_caches`
+  + 2、写操作： `dd if=/dev/zero of=$PWD/optfile bs=20MB count=100`
+    + 3、`vmstat 1`  cache增大， bo有明显数据，in也有明显数据变化
+    + 4、`iostat -dx 1` wkB/s有非常大的数据， await也有数
+  + 我现在磁盘的写速度大概时400MB/s
+
++ 测试磁盘**读**的速度
+  + 1、先清空缓存 `echo 3 >/proc/sys/vm/drop_caches`
+  + 2、写操作： `dd if=/dev/sda of=/dev/null bs=20MB count=100`
+    + 3、`vmstat 1` buff 有明显的数据，cache有数据变化，但是不明显， bi有明显的数据
+    + 4、`iostat -dx 1`  rKB/s有明显的数据，await有，但是不是很大
+
++ 测试内存的速度
+  + 1、先清空缓存 `echo 3 >/proc/sys/vm/drop_caches`
+  + 2、脚本： `dd if=/dev/zero of=/dev/null bs=10MB count=1000`
+
+**结论**： 磁盘的读写速度，几百MB/s   内存 几GB/s  **内存速度比磁盘快很多**。
+
+<span color="red">**写**</span>操作时，**cache**增大， **bo**有明显数据，
+
+**读**数据时，**buff**增大， **bi**有明显数据

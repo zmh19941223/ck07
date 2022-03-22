@@ -1,0 +1,100 @@
+# 20210915白板
+
++ 实战 
+
+  + docker + mysql + kyj项目 + nginx
+    + 性能测试
+    + 调优： 数据库优化  -------增加索引
+    + dockers + kyj + nginx
+
+  ```
+  docker run -itd --name nginx_kyj -p 80:80 nginx
+  ```
+
+  nginx.conf  集群的文件
+
++ 知识回顾
+
+  + 服务器架构演进一
+    + 所有的项目代码，放在一个工程下面------对于服务器硬件要求很高
+  + 服务器架构演进二
+    + 拆分：  数据库服务器、文件服务器、应用服务器、集群
+  + 服务器架构演进三
+    + 应用拆分： 应用集群、 数据库集群
+  + 服务器架构演进四
+    + 应用再拆分： 微服务、 docker容器化
+
++ 性能知识：
+
+  + 硬件： cpu、内存、磁盘、io、网络
+    + top\vmstat\pidstat\mpstat\iostat\netstat\sar........
+      + yum install sysstat -y
+    + cpu:  
+      + cpu的组成： 控制单元、寄存单元、计算单元、 + 时钟
+      + 上下文切换
+        + 进程上下文切换
+        + 线程上午文切换
+    + 内存：
+      + 虚拟内存
+      + 物理内存
+      + GC：  YGC   FGC   回收资源的时候，会导致 卡顿。
+      + 内存泄漏、内存溢出
+        + OOM
+          + jmap  堆栈信息dump下来
+          + arthas  堆栈信息dump下来
+          + MAT
+    + IO:  换入换出
+      + 磁盘： buff  cache
+        + dd
+    + 网络：
+      + 发起方1端口
+      + 带宽
+      + ulimit
+      + sysctl
+  + 应用
+    + tomcat
+      + 配置文件
+        + 堆栈信息
+        + 线程池
+    + nginx： 负载均衡  集群策略
+      + nginx.conf
+    + 数据库：
+      + mysql：
+        + 安装数据、docker安装
+        + 数据库配置my.cnf
+        + 库、表
+          + 表： 存储引擎   InnoDB  MyISAM
+          + 表：索引
+            + 主键索引
+            + 唯一索引
+            + 复合索引
+          + select：  编写顺序、解析顺序不一样
+          + explain select
+          + 慢查询脚本
+          + 数据库配置的优化：   too many connect    \  500
+      + redis
+        + 内存数据库
+        + 安装、redis
+
+  + 微服务： docker + 项目(springcloud)
+    + docker命令
+      + docker run 
+      + docker rm
+      + docker pull
+      + docker images
+      + docker rmi
+      + docker ps  
+      + docker logs
+      + docker inspect 
+      + docker exec
+      + docker network
+      + docker restart
+      + docker stats 
+
+
+
++ 简历编写
+  + 简历第一阅读人？
+    + 专业词
+    + 项目记录中，要有性能测试相关技术实践
+

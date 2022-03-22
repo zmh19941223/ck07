@@ -1,0 +1,78 @@
+# 20210901白板
+
++ mysql数据库的优化
+
+  + os + 库
+
+    + 磁盘io比较高磁盘、磁盘空间比较大
+    + os： linux
+      + os本身就有一些限制
+      + ulimit   打开文件数量，操作系统可以运行最大进程+线程数
+        + ulimit -a
+      + 库本身配置参数
+        + show variables;
+        + table_open_cache  数据表缓存
+          + 数据库缓存有两种：
+            + 数据库本身的缓存： 库本身 cache、buff
+            + 缓存数据库： redis
+        + 数据库本身的缓存大小是可以被配置，配置的越大，数据库要用的内存也就越大
+        + max_heap_table_size  是说 memory存储引擎表的大小为多少  默认16M
+        + slow_query_log  慢查询的开关
+        + slow_query_log_file  慢查询开关开启启，慢查询脚本会自动写入文件
+        + long_query_time  慢查询时间的阈值， 当sql的执行时间超过这个设定时间，就是慢查询。单位： 秒
+          + 如何获取到慢查询脚本？
+            + 生产环境中，默认是不会写慢查询日志的。
+            + slow_query_log 这个开关默认是关闭的，就要开启这个开关
+            + 开关开启之后，日志，就根据long_query_time的时间，判断，超过这个时间，那么就会写入slow_query_log_file文件中去。
+
+  + 实操 慢查询：
+
+    + 易捷支付项目的数据库开启慢查询日志
+
+    + ```
+      # 进入数据库容器
+      docker exec -it centos7_mysql57 /bin/bash
+      
+      # 找到容器中 mysql的配置文件路径 /etc/mysql/mysql.cnf
+      
+      exit  # 退出容器
+      
+      # 从容器中，拷贝路径下 mysql.cnf文件到当前路径
+      docker cp centos7_mysql57:/etc/mysql/mysql.cnf $PWD
+      
+      #### 如果你不知道怎么去找这个配置文件，你就用我这个命令
+      docker cp centos7_mysql57:/etc/mysql/mysql.conf.d/mysqld.cnf $PWD
+      
+      # 在本地修改mysqld.cnf文件
+      slow_query_log=ON
+      long_query_time=1
+      
+      
+      #把修改后的mysqld.cnf文件，拷贝到容器中去
+      docker cp mysqld.cnf centos7_mysql57:/etc/mysql/mysql.conf.d/mysqld.cnf
+      
+      # 重启容器
+      docker restart centos7_mysq57
+      
+      ```
+
+    + 我们在做性能测试时，响应时间超过 long_query_time这个设置的时间，才可能出现慢sql
+
+    + 如果出现 Too many connections   适当的调整max_connections
+
+    + 应用程序  ，调用数据库，是不是 还有一个配置文件？
+
+      + 配置文件
+
+      + ```
+        netstat -ano|grep dbms_prot |grep ESTABLISHED |wc -l
+        # 这个命令，在数据库机器中执行  看数据库当前总共有多少的连接数
+        
+        netstat -ano|grep dbms_prot |grep pjserver_ip |grep ESTABLISHED |wc -l
+        #  这个命令，在数据库机器中执行 可以看到  应用程序pjserver与 数据库建立连接数有多少
+        ```
+
+      + 
+
+  + 表 + 脚本
+

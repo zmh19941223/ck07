@@ -1,0 +1,148 @@
+# 20210827白板
+
++ 数据库
+  + mysql  =====关系型数据
+  + dbms
+    + 关系型数据
+      + MySQL
+    + 非关系型
+      + redis
+    + 时序型数据
+
++ mysql：
+
+  + 安装：数据库的版本 mysql5.7版
+    + 现在企业中mysql版本，大多在mysql5.7
+
+  ```
+  rpm -Uvh http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
+  
+  # 安装mysql-server
+  yum install mysql-community-server -y
+  
+  # 启动数据库
+  systemctl restart mysqld
+  
+  # 配置开机自启动
+  systemctl enable mysqld
+  ```
+
+  最简单， 但是因为网络的原因，要下载，可能时间会比较长
+
+  
+
+安装方法2：
+
+​	使用rpm包安装
+
+​	速度很块，但是，包有先后顺序的依赖关系，
+
+
+
+安装方法3：----速度最块
+
+​	docker方式安装
+
+​	速度很快，但是，需要有docker的技能
+
+```
+# 安装docker
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+docker run -itd --name mysql -p 3337:3306 -e MYSQL_ROOT_PASSOWORD=123456 mysql:5.7
+```
+
+
+
+
+
++ 修改数据库的密码：
+
+  + 通过 `grep "password" /var/log/mysqld.log`  可以找到密码，但是这个密码是高复杂度的密码，这个密码不好记忆
+
+  + 我们想要修改为低复杂度好记忆的密码
+
+  + 修改 mysql数据库的配置文件  /etc/my.cnf
+
+    + 这个路径，是直接安装mysql数据库方式的 数据库的配置文件路径
+    + 在[mysqld]节点下
+
+    ```
+    [mysqld]
+    
+    validate_password_policy=0	# 设置为 弱密码
+    validate_password=off	# 关闭密码策略
+    
+    character_set_server=utf8
+    init_connect='SET NAMES utf8'
+    
+    ```
+
+    重启动mysql: `systemctl restart mysqld`
+
+    进入mysql客户端 `mysql -uroot -p` 回车
+
+    ```
+     alter user 'root'@'localhost' identified by '123456';
+     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+     FLUSH PRIVILEGES;
+    exit;
+    
+    ```
+
+    mysql的默认端口 3306
+
++ 安装mysql方法2，使用docker安装
+
+  + 安装docker
+
+  ```
+  # 安装docker依赖：
+  yum install -y yum-utils device-mapper-persistent-data lvm2
+  #安装docker：
+  curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyuncurl -sSL 
+  
+  # 重启docker 
+  systemctl restart docker
+  # 配置开机自启动
+  systemctl enable docker
+  ```
+
+  ```
+  # 创建一个mysql容器
+  docker run -itd --name mysql5735 -p 3337:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7.35
+  ```
+
+  + 创建库
+
+  + 创建表：
+    + 存储引擎： 默认是InnoDB
+      + 在mysql5.5以后版本，默认存储引擎InnoDB
+      + 5.5以前是MyISAM
+    + 什么是存储引擎？
+    + 存储引擎，不同的引擎，有不同的性能，所以，我们在建表的时候，要合理的选择存储引擎。
+
+   + 索引
+     	+ 主键索引： id
+     	+ 唯一索引： 不可重复，NULL 有多个
+      + 复合索引： **多列**的名称一起建立一个索引，列的字段是有顺序
+        	+ 复合索引，字段顺序非常关键，你在使用时，就一定要安装它的顺序来，如果不是安装它顺序，那么你就没有使用这个符合索引。
+         + 举例：  
+           	+ st_student  （col1,col2,col3,col4,col5,col6）
+            + fhindex (col1, col3, col4)
+               + 顺序： 
+                 	+ col1 --> col3  ---col4
+                 	+ col1 ---> col3
+                 	+ col1
+            + sql的where条件，就一定要按照fhindex的顺序
+               + where条件   
+                 	+ 1:  col1=?,col2=?        ×
+                 	+ 2:  col1=?,col3=?       √
+                 	+ 3:  col1=?, col3=?, col4=?      √
+                 	+ 4:  col1=? col4=?, col3=?     ×
+                 	+ 5:  col3=?, col4=?      ×
+                 	+ 6:  col1=?, col4=?     ×
+                 	+ 7: col1=?     √
+                 	+ 8: col3=?      ×
+                 	+ 9: col4=?, col3=?     ×
+  	+ 

@@ -1,0 +1,114 @@
+# 20210816白板
+
++ 实战项目： python3 + flask
+
+  + 安装python3
+
+    + ```
+      yum install gcc -y
+      yum groupinstall 'Development tools' -y
+      yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel libffi-devel -y
+      
+      ```
+
+    + ```
+      # 上传python3.9.1包
+      # 解压，进入解压后的文件夹
+      ./configure --prefix=/usr/local/python3/
+      make && make install 
+      
+      ln -s /usr/local/python3/bin/python3 /usr/bin/python3
+      ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3
+      ```
+
+    + 安装flask
+
+      ```
+      pip3 install flask 
+      ```
+
+      
+
+    + 运行项目： `python3 pertest_io.py`
+
+    + jmeter请求  http://ip:9800/pertestio/随机数字
+
+    + 发现： 系统平均负载在上升
+
+    + 定位： 
+      + top   cpu的wa值 非常高
+      + vmstat 2  : io的**bo值**，有明显的数据  ====== 有大量的写磁盘操作，
+      + mpstat -P ALL 2
+      + iostat -dx 2   看到  wKB/S  有非常大的数据，  现在的磁盘 有大量的写操作
+
++ 网络
+  + TCP协议：通过数据发送者和接收者相互回应对方发来的确认信息，可靠的进行数据传输
+  + IP协议：指定数据发送的ip信息，以及通过路由转发数据
+
+”数据“ + tcp + ip + 帧头\帧尾
+
++ TCP组成：源地址、源端口、目的地址、目的端口
+
+  + 电脑最多： 65535个端口
+
+  + 1- 1023  公认端口 21、22、25、80、443
+
+  + 1024-49151  注册端口  8080  9800 3000
+
+  + 49152~65535 私有端口  约16800
+
+  + 问题： Address already in use: connect
+
+  + 优化方向：
+
+    + 扩大端口范围： 1024  ~ 65535   达到6.4w端口
+    + 让端口占用的时长缩短：  去掉keepalive
+
+  + 定位问题：
+
+    + 1、看到报错
+
+      + 获取商品列表
+
+      + 分析
+
+        + windows： `netstat -ano | find "TCP" /i /c`
+
+          + /i   不匹配大小写
+          + /c  统计
+
+          如果你发起方机器，这个命令的数值，约1.4w，可以肯定，你本地端口成为性能瓶颈
+
+        + linux：`netstat -ano | grep "TCP" | wc -l`
+
+    + 2、调优
+
+      + 去掉： keepalive  并不能解决问题，只是把这个报错时间往后延迟一点
+      + 修改注册表：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+        + 添加 MaxUserPort  十进制 65534
+        + 添加TcpTimedWaitDelay  十进制  30
+        + 重启系统
+
+      + linux，如果你发发起方是Linux
+
+        + sysctl -a |grep net.ipv4.ip_local_port_range
+
+        + net.ipv4.ip_local_port_range = 32768    60999  =====2.8w
+
+        + 改端口范围： 
+
+          ```
+          sysctl -w net.ipv4.ip_local_port_range="1024 65535"
+          sysctl -p
+          ```
+
++ 判断带宽有没有问题：
+
+  + 吞吐率
+    + 1Mbps = 1024Kbps  = 1024/8 KB/s = 128KB/s
+  + ping
+    + ping目标服务器  
+      + 看时间   没有测试前的时间 与在进行性能测试时的  时间之间有没有明显的差异
+      + 看丢包： 如果有丢包  肯定时网络瓶颈
+
+  

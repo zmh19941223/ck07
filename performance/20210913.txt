@@ -1,0 +1,137 @@
+# 20210913白板
+
+
+
++ docker
+  + 安装
+  + 配置docker
+    + 1、源
+    + 2、启动： systemctl restart docker
+    + 3、开机自启动： systemctl enable docker
++ docker命令
+  + docker run   -----创建一个容器，同时运行这个容器
+  + docker create   ----创建容器，但是不会运行
+  + docker pull 镜像:tag   -----下载镜像
+  + docker images ----- 查看机器上的镜像
+  + docker ps  ----查看机器上已经创建了哪些容器
+    + 不再跟参数，  看正在运行的容器
+    + -a 查看所有的容器，包括未启动的容器
+  + docker rm -f  容器名称    -----删除容器，  可以删除正在运行的容器
+  + docker rmi -f 镜像   -----删除镜像
+  + docker logs  容器名称  ----- 查看容器中的服务运行日志
+  + dockers network  ------容器网络相关配置
+  + docker exec   -----进入容器
+  + docker cp  ----拷贝
+  + docker inspec 容器名称   ----- 查看容器信息
+
++ docker 网络
+  + docker network --help
+  + docker network create 
+  + docker network connect 
+  + docker network disconnect
+
+
+
+docker安装一个mysql数据库容器
+
+```sh
+docker run -itd --always restart --name=vip11_mysql -p 3336:3306 -e MYSQL_ROOT_PASSWORD=123456 daocloud.io/library/mysql:5.7.31
+```
+
+
+
+docker inspect  容器 |grep "IPAddress"   -----查看容器的ip
+
+
+
+
+
++ kyj项目用docker方式来部署
+  + 数据库： docker
+    + 初始化
+
++ docker部署kyj项目
+
+  + kyj项目 jdk1.7
+  + 创建容器
+
+  ```sh
+  docker run -itd --name tomcat_1 -p 8484:8080 -v $PWD/webapps/:/usr/local/tomcat/webapps/ daocloud.io/library/tomcat:8.0.44-jre7
+  ```
+
+  
+
+  ```sh
+  docker run -itd --name tomcat_2 -p 8585:8080 -v $PWD/webapps/:/usr/local/tomcat/webapps/ daocloud.io/library/tomcat:8.0.44-jre7
+  ```
+
+  
+
+  + 项目包： 从原来kyj项目机器中 下载 app.tar.gz包，上传到机器上
+
+数据库的ip : 172.17.0.2    172.18.0.2
+
+tomcat_1: 172.17.0.3
+
+tocmat_2: 172.17.0.4
+
+application.properties：   数据库ip和端口 宿主机的ip和端口   192.168.3.40:3336
+
+application.properties：   数据库ip和端口 宿主机的ip和端口   172.17.0.2:3306
+
+
+
+性能测试与调优、 nginx搭建集群
+
+```sh
+docker run -itd --name vip11-nginx -p 8888:80 daocloud.io/nginx
+```
+
+
+
+
+
+
+
+
+
+Ø安装mysql数据库
+
+Ø初始化数据库 redis_goods
+
+CREATE TABLE `goods_item` (
+
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+
+ `code` varchar(255) DEFAULT NULL COMMENT '商品编号',
+
+ `name` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '商品名称',
+
+ `create_time` datetime DEFAULT NULL,
+
+ `update_time` datetime DEFAULT NULL,
+
+ PRIMARY KEY (`id`)
+
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='商品信息表';
+
+Ø反复执行插入数据
+
+ INSERT INTO goods_item(code,name,create_time,update_time) VALUES('good_10001','高级性能测试VIP课,NOW(),NOW())；
+
+
+
+
+
+
+
++ 项目环境搭建
+  + 上传项目包
+  + 修改配置文件 conf/application.properties
+  + 修改conf/wrapper.conf文件
+    + wrapper.java.command=jdk路径
+
++ bin文件夹 ./server.sh start
++ 
++ http://ip:8089/api/cache/goods/info?itemCode=good_10001
+

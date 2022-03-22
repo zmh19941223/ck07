@@ -1,0 +1,102 @@
+# 20210818白板
+
++ 网络包
+  + 源地址
+  + 源端口：
+    + 每发起一次请求，就要占用发起方一个端口
+      + 端口数量是有限的，端口数量就可能成为性能瓶颈
+      + 出现错误？： Address already is used     Connection refused
+        + 可能的原因1： **源端口不够用**
+          + 源端口问题，怎么调优？
+            + 1、keepalve 勾去掉
+            + 2、修改发起方的系统信息
+              + windows: 注册表：  
+                + MaxUsePort： 十进制65535
+                + TcpTimedWaitDelay:  十进制 30
+              +  linux：
+                + sysctl  net.ipv4.ip_local_port_range   1024 65535
+        + 可能的原因2： 服务器要调优
+          + os操作系统
+            + sysctl
+            + ulimit -n
+          + 应用中间件
+            + 连接池
+              + 应用连接池
+              + 数据库连接池
+  + 目标地址
+  + 目标端口
+
++ ulimit   `ulimit -a`  查看所有的限制
+
+  + `ulimit -n`  open files  打看文件数量限制  默认1024. 某一个应用程序，最多可以打开的文件数量
+
+  + 修改配置项： `ulimit -选项参数 配置值`  ----这种修改，只是**临时**修改，系统重启之后，自动还原。
+
+  + 持久化\永久性的修改
+
+    ```
+    vim /etc/security/limits.conf
+    
+    *	soft	nproc	32768
+    *	hard	nproc	32768
+    *	soft	nofile	16000
+    *	hard	nofile	16000
+    ```
+
+    不管你是用  ulimit命令修改，还是 修改文件limits.conf， 你的应用程序要使用这个配置，那么你的应用程序需要重启
+
+  + 检查系统配置是否成为瓶颈：
+
+    ```
+    lsof -p pid |wc -l
+    lsof |wc -l
+    cat /proc/PID/limits	 # 看具体某个进程运行打开的文件数量
+    
+    ```
+
++ 禁ping
+
+```
+# 禁ping
+sysctl -w net.ipv4.icmp_echo_ignore_all=1
+sysctl -w net.ipv4.route.flush=1
+sysctl -p
+
+# 开启
+sysctl -w net.ipv4.icmp_echo_ignore_all=0
+sysctl -w net.ipv4.route.flush=1
+sysctl -p
+```
+
+
+
+
+
+cpu、内存、磁盘、网络  回顾
+
+
+
++ cpu	
+  + 进程上下文切换高问题
+    + 减少服务器上进程数量
+    + 增加cpu
+  + 线程上下文切换高问题
+
+
+
++ 内存
+
+  + 一个程序启动，在内存中分配一定量的 内存空间  (物理内存)
+  + 一个线程的内存，是由 虚拟内存 + 物理内存
+    + 虚拟内存中： 链表、页表
+    + 物理内存中： 存储程序的相关数据
+
+  + 内存溢出
+  + 内存泄漏
+
+服务器上的应用中间件
+
+服务器上数据库
+
+
+

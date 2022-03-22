@@ -1,0 +1,97 @@
+# 20210820白板
+
++ USE方法
+
+  + use
+
+  + cpu分析： top
+
+    + loadaverage: 1 5 15分钟
+      + cpuload  + ioload
+    + 上下文切换
+      + 进程上下文切换
+      + 线程上下文切换
+        + 同一个进程中，线程上下文切换，只需要保存，线程所私有资源
+        + 不同进程中，线程上下文切换， 先保存线程私有资源 + 进程的资源
+      + 中断切换
+
+    + cpu性能分析：
+      + top
+      + vmstat    proc   r列
+      + pidstat   具体看  自愿上下文切换  非自愿上下文切换   定位具体的pid
+
+  + 内存：
+
+    + 虚拟内存
+    + 物理内存
+      + 内存问题怎么定位：
+        + OOM：
+          + jstat   dump
+          + arthas    threaddump
+          + MAT
+        + 内存溢出
+        + 内存泄漏
+
+  + io问题
+
+    + iostat
+    + vmstat  io bi/bo
+    + buff  
+    + cache
+
++ 网络：
+  + 源地址
+  + 源端口： 
+    + 发起方window：
+      + 1、去掉keepalive
+      + 2、改注册表： MaxUserPort   65535、 TcpTimedWaitDelay 30
+    + 发起方linux
+      + 1、去掉keepalive
+      + 2、sysctl -w net.ipv4.ip_local_port_range="1024 65535"; sysctl -p
+      + 3、ulimit -n 16000
+  + 目标地址
+    + ~~sysctl -w net.ipv4.ip_local_port_range="1024 65535"; sysctl -p~~
+    + ulimit -n 16000    ulimit -u 65535
+      + nproc、 nofile
+  + 目标端口： 线程池
+
+
+
+如果看到响应信息中有，too many open file       ` too many connection`
+
+
+
++ tps上不去，可能的原因
+  + 带宽
+  + io
+  + 连接池： 应用连接池、数据库连接池  默认151
+  + 资源回收： gc、堆栈配置
+  + 数据库的配置
+  + linux服务器的配置
+  + 通信连接机制：  http   websocket
+  + 硬件
+  + 脚本本身，  beanshell
+  + 压力机  
+  + 业务逻辑
+  + 系统架构
+
+
+
++ java：
+  + 包： war   jar
+  + 运行： jre\jdk  运行的中间件tomcat
+  + apache托管
+    + tomcat
+      + bin文件夹中 catalina.sh  文件中，配置堆栈
+      + conf 文件夹中  server.xml 文件   修改协议端口的
+        + 如果你一台电脑上想要启动多个tomcat，你这个server.xml文件，要修改3个端口
+      + logs文件夹
+        + 看日志，看哪个文件  catalina.out
+      + webapps文件夹
+        + 项目工程包
+          + 包： war  自动解压，  其他格式，不会自动解压
+        + 在webapps下丢多个项目包，解压后，就可以实现一个tomcat部署多个项目
+
+springcloud，自己带有tomcat，它打出来的jar包，可以直接运行
+
+java -jar xxxx.jar    默认就是8080

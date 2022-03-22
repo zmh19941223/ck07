@@ -1,0 +1,74 @@
+# 20210811白板
+
++ oom项目环境部署
+  + 准备一台linux
+  + 检查 jdk1.8
+  + tomcat   Jvmpertest.war 丢到webapps文件夹下
+    + catalina.sh
+    + `JAVA_OPTS="-Xms256m -Xmx256m -Xmn128m"`
+  + 启动tomcat
+  + jmeter调用： http://ip:8080/JvmPertest/pertest1
+    + 设置性能场景进行调用
+
++ 确定oom问题：
+  + 看请求的响应信息， 一般的情况下，出现内存溢出问题，在响应信息中都会有所体现`nested exception is java.lang.OutOfMemoryError: Java heap space`
+  + 有些项目，在log日志中，会有体现，  ===不一定有
+  + 我们看 系统的 内存
+    + 内存并没有被完全消耗掉
++ 定位这个问题：
+  + 生成内存溢出堆栈文件
+    + 获得进程id  `ps -ef |grep java` `jps`
+    + `jmap -dump:live,format=b,file=heap_jvmpertest_20210811002.hprof 2419`
+    + 方法2：arthas
+      + curl -O https://arthas.aliyun.com/arthas-boot.jar
+      + 启动： `java -jar arthas-boot.jar pid`
+      + `heapdump`  ，在出现内存溢出的错误是，执行这个命令，可以直接下载heapdump信息
+  + MAT
+    + 解压MemoryAnalyer工具
+    + 打开工具，open hprof文件
+    + 点击 histogram
+    + 没有java基础的同学， hprof文件给开发去定位， 有基础的同学，mat工具自己来分析
+
+看jvm的 gc信息： -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCTimestamps -XX:+PrintGCApplicationStopedTime
+
+IO操作，所以，生产环境，一般不添加
+
+`jstat -gcutil 3122 1000 10`  分析gc
+
+ØS0：新生代susvivor0区
+
+ØS1：新生代susvivor1区
+
+ØE：新生代eden区
+
+ØO：年老代
+
+ØM：方法区回收比例 CCS：类空间回收比例
+
+ØYGC：minor gc次数
+
+ØYGCT： minor gc耗费的时间
+
+ØFGC： full gc的次数
+
+ØFGCT： full gc的耗时
+
+ØGCT： gc总耗时
+
+
+
+cpu相关问题，应用服务器中高频率
+
+内存： 工作中，比较难
+
+网络：见的多，但是不是最难，只是因为大家 见多，网络知识跟不上
+
+磁盘问题： 相对来说问题是最少， 一般集中在 文件服务器\数据服务器
+
+
+
+
+
++ 磁盘
+  + 服务器 最大存储空间，但是速度比较慢
+  + 磁盘的格式化： 最大化的利用磁盘，以及加快磁盘的读写

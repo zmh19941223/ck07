@@ -1,0 +1,117 @@
+# 20210908白板
+
++ MySQL
+
+  + 主从同步、读写分离
+
+    + 2个以上的数据库
+
+    + 主数据库、从数据库配置：
+
+      + 1、修改配置文件 server-id  越小，主数据库 大，从数控
+      + 2、从数据库配置，配置主数据库的host、port、user、password
+
+    + 关键点： Slave_IO_Runing  Slave_SQL_Runing  一定要为yes
+
+      
+
+  + 分表分区
+
+    + 分表： 
+      + 垂直分表： 是把表的结构发生变化，列数量发生了变化
+      + 水平分表： 表结构可能没有变量，行数量发生了变化
+
+CREATE TABLE stu_info_all(
+  `ID` int(8) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `teacher` varchar(32) DEFAULT NULL,
+  `remark` varchar(32) DEFAULT NULL
+)ENGINE=MRG_MYISAM UNION(stu_info_new_1, stu_info_new_2, stu_info_new_3) insert_method=LAST DEFAULT CHARSET=utf8mb4;
+
+
+
++ 分区： 数据存到不同的磁盘位置上
+  + 数据库是否支持分区： `show  plugins;`  看  partition  这个的值是否为 active。是，说明，我们的数据库支持分区。
+
+range分区： 给定区间
+
+create table 表名(id,col1,col2.....) partition by range(id) 
+
+(partition less_10000 **values** **less** **than**(10000)  **data** directory **=** '/opt/less_1w/'  **index** directory **=** '/opt/less_1w', 
+
+partition less_20000 **values** **less** **than**(20000)  **data** directory **=** '/home/less_2w/'  **index** directory **=** '/home/less_2w',
+
+......)
+
+list分区
+
+columns
+
+hash分区
+
+key分区
+
+composite 分区
+
+
+
+数据库数据量级 在几千，你连索引都可以不建； 几万，到几十万，上百万数据时，考虑索引；上千万的数据时，考虑 分表；  大几千万，甚至上亿级别数据，这个时候考虑分区。
+
+
+
+
+
++ 非关系型数据库
+  + redis   现在企业中普遍使用它来做   缓存数据库
+  + 内存数据库，但是支持数据持久化
+
++ redis 常见的数据类型
+  + 字符串
+  + 列表
+  + 集合
+  + 有序集合
+  + hash
+
++ 安装redis
+
+```
+yum install gcc-c++ make -y
+
+# 升级gcc
+$ yum -y install centos-release-scl
+$ yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils
+$ scl enable devtoolset-9 bash
+$ echo "source /opt/rh/devtoolset-9/enable" >>/etc/profile
+# 此时，通过gcc -v 看到gcc的版本应该是在9以上
+
+```
+
+```
+$ wget http://download.redis.io/releases/redis-6.0.8.tar.gz
+$ tar xzf redis-6.0.8.tar.gz
+$ cd redis-6.0.8
+$ make
+
+# 如果想安装到指定路径： make PREFIX=/usr/local/redis install   指定安装到/usr/local/redis路径
+
+# 启动
+$ src/redis-server
+
+```
+
+进入安装路径中   `src/redis-cli	`  进入客户端模式
+
+```
+config get *
+# 获取redis的所有配置信息
+```
+
+
+
+
+
+
+
+项目的服务要获取数据  =======>redis 获取数据===没有======>底层的数据库
+
+项目的服务要获取数据  =======>redis 获取数据===有======>把数据返回给服务 

@@ -1,0 +1,156 @@
+# 20210825白板
+
++ nginx：
+  + 两种安装方式
+    + 源码安装：
+      + 优点： 可以后续扩展
+      + 缺点： 安装稍微麻烦一些
+    + 系统安装
+      + rpm源 + yum 安装
+      + 优点：安装简单
+      + 缺点： 后续无法进行扩展
+
++ 源码安装nginx：
+  + 启动： `/usr/local/nginx/sbin/nginx`
+  + 配置文件： /usr/local/nginx/conf/nginx.conf
+  + 检查配置文件是否正常：`/usr/local/nginx/sbin/nginx -t`
+  + 重新加载已经修改的配置文件： `/usr/local/nginx/sbin/nginx -s reload`
+
+
+
++ 我们的监控平台： grafana + prometheus  监控nginx
+
+  + 1、nginx机器上 下载nginx-module-vts
+
+  ```
+   # nginx-module-vts.tar.gz
+   git clone https://gitee.com/mirrors/nginx-module-vts.git
+  
+   tar -xzvf  nginx-module-vts.tar.gz
+   
+   # 路径： /opt/nginx-module-vts
+  ```
+
+  ```
+  # 重新安装nginx
+  # 进入nginx的解压文件夹中
+  ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --add-module=/opt/nginx-module-vts/
+  
+  make && make install
+  ```
+
+  ```
+  # 杀调nginx
+  
+  # 启动nginx
+  /usr/local/nginx/sbin/nginx
+  ```
+
+  
+
+  + 2、安装 nginx-vts-exporter
+
+  ```
+  # 下载
+  wget https://github.com/hnlq715/nginx-vts-exporter/releases/download/v0.10.3/nginx-vts-exporter-0.10.3.linux-amd64.tar.gz
+  
+  tar -xzvf nginx-vts-exporter-0.10.3.linux-amd64.tar.gz
+  
+  cd nginx-vts-exporter-0.10.3.linux-amd64
+  
+  # 启动
+  nohup ./nginx-vts-exporter -nginx.scrape_uri=http://localhost/status/format/json &
+  
+  ```
+
+  现在用  http://nginx_ip:9913/metrics   访问   可以访问，但是没有数据
+
+  没有数据是什么原因呢？==-====我们需要修改nginx.conf配置
+
+  + 3、修改nginx.conf配置文件
+
+  ```
+  # 在http节点下
+      vhost_traffic_status_zone;
+      vhost_traffic_status_filter_by_host on;
+  
+  # 再在 server
+  
+          location /status {
+              vhost_traffic_status_display;
+              vhost_traffic_status_display_format html;
+          }
+  
+  ```
+
+  ```
+  # 重新加载 nginx.conf文件
+  /usr/local/sbin/nginx -t  
+  /usr/local/sbin/nginx -s reload
+  ```
+
+  这个时候 刷新  http://nginx_ip:9913/metrics    我们看到页面中多了很多数据，nginx_vts_exporter 已经开始收集数据
+
+  + 4、启动grafana  `systemctl restart grafana-server`
+  + 5、配置prometheus
+
+  ```
+  # 修改Prometheus.yml
+  
+    - job_name: 'nginx_exporter'
+      static_configs:
+      - targets: ['192.168.3.41:9913']
+  
+  ```
+
+  ```
+  nohup ./prometheus &
+  ```
+
+  
+
+  + 6、访问： http://grafana_ip:3000  admin  admin
+
+  + 7、添加数据源，引入模板： 2949
+
+    
+
+  + 到现在，我们做性能测试同时，收集了 tomcat、nginx、node
+
+
+
++ 服务器架构演进(三)
+  + 数据库演进
+  + 数据库 database
+  + 数据库管理系统 dbms
+    + 关系型数据库： mysql、sqlserver
+      + 是指采用关系模型来组织数据库的数据，以行+列的方式存储数据
+      + 二维表： 结构化我们的数据
+      + 关系型数据库，有统一标准的sql
+        + DCL 数据库控制语言 主要用于创建**数据库**的**用户和角色**
+        + DDL 数据库定义语言 主要用于创建或删除**数据库**以及表
+        + DML 数据库操作语言 主要用于**表数据操作**
+        + DQL  数据库查询语言  主要对数据库**表**进行**查询操作**
+    + 非关系型数据库： mongodb、redis
+    + 时序数据库： influxdb、Prometheus
+
+
+
+因为关系型数据库，遵循ACID原则，所以，一般情况，要数据库入库准确，而且字段数量并更不是很频繁的情况下，使用关系型数据。
+
+存储信息的字段数量不相等，或不确定情况时，我们一般就用 非关系型数据库
+
+现在企业中，关系型数据库 + 非关系型数据库  组合 存储数据的情况，非常场景
+
+数据库锁： 两种常见的
+
+​	行锁： 每次锁定一行
+
+​		只有获得了某一行操作的锁了，才能操作这一行数据， 当有高并发时，我可以不同的线程来操作不同的行。
+
+​	表锁： 每次把整张表锁定
+
+​		在操作前，先获得整张表的操作锁，只有获得到锁的这个线程，才能操作整张表，其他的线程，没有拿到锁，就只能等待。
+
+mysql数据库一般是5.5以上的版本，它的锁默认是 行锁。mysql5.5以前的版本，默认 表锁。
+

@@ -1,0 +1,113 @@
+# 20210910白板
+
++ 服务器演进架构 4
+  + 容器： docker
+  + 服务： 微服务
+    + 以前，所有的代码写再一个工程下面，生产项目部署包 就是一个  war、jar
+    + 现在拆成为微服务： 根据功能模块来拆分， 拆成很多个服务之后，生成项目部署包 就是多个
+      + 项目部署包多了，使用传统的部署方式， 多个tomcat  消耗非常大的资源
+      + 想办法把部署的容器发生变化，容器运行消耗资源越少越好。
+      + 用docker来虚拟容器
+  + docker：  虚拟化技术发展的一个产品。  
+    + vmware、virtualbox、  +  一个完整的操作系统os  ======比较大的资源
+    +  docker一个软件  +  一个不完整的os(最小操作系统)  ====对于资源的消耗很少
+      + 最小的操作系统os： cgroups、namespace、unionFS
+      + docker虚拟出来的小的操作系统，我们较容器，  docker容器
+    + k8s：一个容器编排与管理的平台\工具
+      + 目前企业中，使用k8s来管理容器，它创建容器，基本上都是使用docker，2022年，k8s中，将不再支持docker创建容器
+
+docker： 软件
+
+docker容器container： 它是一个沙箱。每一个沙箱之间是相互隔离，默认只有一个出入口，
+
+仓库repository：管理容器的镜像的地方，
+
+​	[Docker Hub Container Image Library | App Containerization](https://hub.docker.com/)
+
+[Hub · DaoCloud](https://hub.daocloud.io/)  国内的镜像
+
+镜像image： 根据你的要求，封装好的一个文件集合
+
+docker容器： docker软件+镜像，运行，  就可以提供服务出来
+
++ docker安装
+
+```
+yum install -y yum-utils device-mapper-persistent-data lvm2
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+
+#docker 加速
+vim /etc/docker/daemon.json
+{"registry-mirrors": ["http://f1361db2.m.daocloud.io", "http://hub-mirror.c.163.com", "https://registry.docker-cn.com"]}
+systemctl daemon-reload
+
+
+systemctl restart docker	systemctl enable docker
+
+```
+
+检查你的系统是否安装docker   `docker -v`
+
+在不知道用，获取帮助 `docker --help`
+
+```
+[root@centos7 ~]# docker --help
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default "/root/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level ("debug"|"info"|"warn"|"error"|"fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/root/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/root/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/root/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  app*        Docker App (Docker Inc., v0.9.1-beta3)
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+
+```
+
++ 创建一个tomcat容器
+  + 找镜像  docker pull tomcat:8.5-jdk8-corretto
++ 创建容器： 
+
+```
+docker run -itd --name tomcat85 -p 8989:8080 tomcat:8.5-jdk8-corretto
+```
+
++ 把项目包丢到里面去
+
+docker run -itd --name tomcat_erp -p 9898:8080 -v $PWD:/usr/local/tomcat/webapps tomcat:8.5-jdk8-corretto
+
+
+
++ 留思考：把我们易捷支付项目，使用docker方式来部署
+  + 一个项目  应用程序  + 数据库
+  + docker部署应用程序
+    + jdk1.7 + tomcat
+    + docker pull   下载 jre7的tag的tomcat镜像
+    + 项目包   给搭建的kyj机器中  tomcat\webapps下面的app文件夹打包
+    + 修改配置文件   数据库配置  不一样
+  + dockers部署数据库
+    + 容器来安装数据库
+    + 数据库初始化
+
++ 自己动手 
+  + 
+

@@ -1,0 +1,127 @@
+# 20210628白板
+
++ 性能测试工具
+  + 性能测试： 工具
+  + 性能测试工具： 企业中主流性能测试工具： jmeter
+    + jmeter： java开发的开源，线程、学习很低，接口、自动化、性能测试、第三方性能测试从jmeter扩展
+    + loadrunner： 商业  loadrunner（录播）， 要付费购买并发用户数，脚本是c语言，性能比较好，性能指标值比较准确，性能测试的标杆
+    + wrk： 快速响应性能测试工具，但是，不能做很复杂事情
+    + ab： 快速响应性能测试工具，但是，不能做很复杂事情
+    + ngrinder： 做性能侧开平台、性能工程的平台（groovy、jython）
+    + python + locust： python语言进行性能测试
+
++ wrk：
+
+```sh
+# 全空系统，初始化安装的一些软件
+yum install git vim gcc wget unzip -y
+# 使用git下载wrk的源码
+git clone https://gitee.com/mirrors/wrk.git
+# 安装make  防止系统没有make这个命令
+yum install make -y
+cd wrk
+make
+
+# 验证 wrk是否安装成功
+./wrk -v
+```
+
+```
+[root@centos7 wrk]# ./wrk -t4 -c100 -d60s --latency https://www.baidu.com/
+Running 1m test @ https://www.baidu.com/
+  4 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   330.39ms  165.67ms   1.87s    85.44%
+    Req/Sec    77.72     34.75   200.00     66.05%
+  Latency Distribution
+     50%  270.19ms
+     75%  353.73ms
+     90%  562.05ms
+     99%  944.58ms
+  18472 requests in 1.00m, 276.92MB read
+  Socket errors: connect 0, read 4, write 0, timeout 5
+Requests/sec:    307.47
+Transfer/sec:      4.61MB
+
+```
+
+
+
++ ab   ApacheBench
+  + php语言项目，apache中自动了这个工具
+  + centos、Ubuntu中安装的工具名不一样
+
+```
+#  centos
+[root@centos7 wrk]# yum install httpd-tools -y
+# ubuntu
+apt-get -y install apache2-utils
+
+```
+
++ ngrinder
+
+  + ngrinder-controller  管理（管理界面、管理配置）
+    + 测试脚本： 自动生成、 + 手动修改(groovy 、jython)
+    + groovy： java的衍生语言（有python基础的同学，去学习）
+    + jython： java+ python  ===python的脚本丢jvm虚拟机中运行
+  + ngrinder-agent 代理， 压力机
+  + 目标机器====被测项目
+
++ ngrinder 性能测试开平台的优先选择
+
++ ngrinder 部署
+
+  + 依赖java运行环境， jre、jdk
+
+  + ngrinder的版本，选择使用3.x版本，不要使用低于3的版本
+
+  + ngrinder 3.x版本，jdk必须是1.8及以上，不能低于1.8
+
+  + 下载的包是war包
+
+    + 首先想到  tomcat
+
+      + 速度比较慢， 大概要2分钟左右，才能启动正常
+
+    + ngrinder-controller使用微服务框架spring-boot开发，`java -jar ngrinder-controller-3.5.2.war`  ----推荐
+
+    + 默认端口： 8080
+
+    + http://ngrinder_ip:8080/     admin admin  语言可以选择中文
+
+      
+
+      
+
++ 创建脚本
+
+  + 菜单栏 脚本  》 创建脚本
+  + 脚本名称： 选择语言： groovy、jython 、groovy maven project， 别名
+  + 选择请求方法，填写URL地址
+  + 高级选项： Content-Type： application/json   请求体
+  + 
+
++ 配置ngrinder-agent
+
+  + web管理的登录名， 下载代理   这种方法下载的代理agent的配置文件，已经修改，不需要再次修改
+    + 如果不是这种方法下载，那么就要修改 agent.conf配置文件中controller的ip地址
+  + 解压包  tar -xvf ngrinder-agent-xxxxx.tar
+  + agent部署在非被测服务器上
+  + 启动
+
+  ```sh
+  # sh 结尾的linux文件
+  ./run_agent.sh    # 交互模式运行
+  ./run_agent_bg.sh  # 后台运行
+  ./run_agent_internal.sh  # 第一次是初始化运行
+  ```
+
+  
+
+  + 性能测试：
+    + 菜单 》 性能测试
+    + 目标主机： 被测服务器的ip地址  ------千万不要忘记
+
+ngrinder进行性能测试，是 进程 + 线程的组合模式
+

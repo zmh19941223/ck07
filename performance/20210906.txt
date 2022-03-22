@@ -1,0 +1,121 @@
+# 20210906白板
+
++ mysql：
+  + 主从同步、读写分离====实现 热备份(同时)， 异步
+  + 分表分区
+
++ 主从同步、读写分离
+  + 至少两个数据，一个做存、读，进行数据变更时候，会自动同步到两个数据中
+  + 这种方式，可以提升，io利用，从而提供数据写、读速度。
+  + 关键点： 数据同步
+  + 数据库的数据操作，其实，都是日志操作。
+  + 企业中，会要求有两个以上的数据库服务器
+
+
+
++ 课程中，主从同步环境搭建，1台机器中，使用docker安装多个不同的数据库容器
+
+  + 安装docker
+
+  ```
+  yum install -y yum-utils device-mapper-persistent-data lvm2
+  
+  curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+  
+  
+  # 开机自启动、重启docker
+  systemctl enable docker
+  systemctl restart docker
+  ```
+
+  
+
+  + 安装mysql数据库
+
+  [Hub · DaoCloud](https://hub.daocloud.io/)
+
+  [Docker Hub](https://hub.docker.com/)
+
+  ```
+  # 下载镜像
+  docker pull daocloud.io/library/mysql:5.7.7
+  ```
+
+  ```
+  docker run -itd --name mysq577_master -p 3336:3306 -e MYSQL_ROOT_PASSWORD=123456 daocloud.io/library/mysql:5.7.7
+  
+  docker run -itd --name mysq577_slave -p 3346:3306 -e MYSQL_ROOT_PASSWORD=123456 daocloud.io/library/mysql:5.7.7
+  ```
+
+  + 定义主数据库、从数据库
+
+    + 找到数据库的配置文件，修改配置文件
+
+    + 配置文件路径：   /etc/mysql/my.cnf
+
+    + 修改
+
+      ```
+      #  从容器中，拷贝文件到宿主机
+      docker cp mysq577_master:/etc/mysql/my.cnf $PWD
+      
+      # 修改配置文件
+      [mysqld]
+      server-id	= 100
+      log-bin		= mysql-bin
+      
+      #  server-id值得大小来区分主、从数据库，越小的为主数据库，越大的为从数据
+      
+      # 把修改后的，拷贝到容器中
+      docker cp my.cnf mysq577_master:/etc/mysql/my.cnf
+      
+      # 重启动容器
+      ```
+
+    + 两个数据库之间要建立关联关系
+
+      ```sql
+      #  从数据库中执行
+      CHANGE MASTER TO
+      MASTER_HOST='192.168.2.42',
+      MASTER_PORT=3336,
+      MASTER_USER='root',
+      MASTER_PASSWORD='123456';
+      
+      start slave;
+      ```
+
+      ```sql
+      show slave status;  -- 查看slave的状态
+      ```
+
+      + 重点关注： 
+        + Slave_IO_Runing    必须为 Yes
+        + Slave_SQL_Runing  必须为 Yes
+
+      
+
+    + 数据库操作
+      + 主数据库的操作，都会同步给从数据
+        + 一般情况下， **主数据库当作  写数据库**， 从数据库，当作**读**数据
+        + 代码中，配置两个数据库的信息，存操作时候， 主数据库，  查询操作 使用读数据库
+
+
+
++ 分表分区：
+  + 当数据库的数据量非常大时候，才会去考虑， 一般数据库表中，有大几千万、上亿数据的时候，你们才会考虑分表分区
+  + 分表：
+    + 垂直分表： 把表的结构进行拆分，列的数量进行拆分。 把一个大表文件，拆成多个小表，没有个表数据的大小(磁盘占用空间变小)
+      + 常用字段拆分：  创建视图
+    + 水平分表
+      + 把表的总行数变少，列没有变少
+      + 常见的方法： 时间(月\\年， id尾数)
+  + 分区：
+    + 分别存储到不同的地方，那么每一份的数据大小变小，同时io利用率变高
+
+CREATE TABLE stu_info_master(
+  `ID` int(8) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `teacher` varchar(32) DEFAULT NULL,
+  `remark` varchar(32) DEFAULT NULL
+) ENGINE=MRG_MYISAM UNION=(stu_info_1, stu_info_2, stu_info_3) INSERT_METHOD=LAST DEFAULT CHARSET=utf8mb4;
