@@ -1,0 +1,693 @@
+2020-12-22 21:13:40,458 - [test_login.py-->line:53] - INFO: 用例--【登录成功】---执行通过
+2020-12-22 21:13:40,515 - [test_login.py-->line:53] - INFO: 用例--【手机号为空】---执行通过
+2020-12-22 21:13:40,566 - [test_login.py-->line:53] - INFO: 用例--【密码为空】---执行通过
+2020-12-22 21:13:40,816 - [test_login.py-->line:53] - INFO: 用例--【手机号未注册】---执行通过
+2020-12-22 21:13:41,092 - [test_login.py-->line:53] - INFO: 用例--【密码错误】---执行通过
+2020-12-22 21:13:41,140 - [test_login.py-->line:53] - INFO: 用例--【手机号格式错误】---执行通过
+2020-12-22 21:13:41,467 - [test_recharge.py-->line:68] - ERROR: 用例--【充值成功】---执行失败
+2020-12-22 21:13:41,478 - [test_recharge.py-->line:69] - ERROR: 'ok' != 'OK'
+- ok
++ OK
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 66, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: 'ok' != 'OK'
+- ok
++ OK
+
+2020-12-22 21:13:41,546 - [test_recharge.py-->line:68] - ERROR: 用例--【id错误】---执行失败
+2020-12-22 21:13:41,547 - [test_recharge.py-->line:69] - ERROR: 0 != 1007
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 65, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 1007
+2020-12-22 21:13:41,589 - [test_recharge.py-->line:68] - ERROR: 用例--【不输入id】---执行失败
+2020-12-22 21:13:41,589 - [test_recharge.py-->line:69] - ERROR: 0 != 1
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 65, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 1
+2020-12-22 21:13:41,630 - [test_recharge.py-->line:68] - ERROR: 用例--【不输入金额】---执行失败
+2020-12-22 21:13:41,630 - [test_recharge.py-->line:69] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 65, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:13:41,690 - [test_recharge.py-->line:68] - ERROR: 用例--【充值金额为负数】---执行失败
+2020-12-22 21:13:41,691 - [test_recharge.py-->line:69] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 65, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:13:41,733 - [test_recharge.py-->line:68] - ERROR: 用例--【充值金额为500001】---执行失败
+2020-12-22 21:13:41,734 - [test_recharge.py-->line:69] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 65, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:13:41,792 - [test_recharge.py-->line:68] - ERROR: 用例--【充值金额非数字】---执行失败
+2020-12-22 21:13:41,792 - [test_recharge.py-->line:69] - ERROR: '数字格式化异常' != '余额必须为数值型'
+- 数字格式化异常
++ 余额必须为数值型
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 66, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '数字格式化异常' != '余额必须为数值型'
+- 数字格式化异常
++ 余额必须为数值型
+
+2020-12-22 21:13:41,844 - [test_recharge.py-->line:68] - ERROR: 用例--【充值金额小数点3位】---执行失败
+2020-12-22 21:13:41,844 - [test_recharge.py-->line:69] - ERROR: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 66, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+
+2020-12-22 21:13:42,116 - [test_register.py-->line:47] - ERROR: 用例--【注册成功-带注册名】---执行失败
+2020-12-22 21:13:42,116 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:13:42,372 - [test_register.py-->line:47] - ERROR: 用例--【成功-不带用户名】---执行失败
+2020-12-22 21:13:42,372 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:13:42,413 - [test_register.py-->line:52] - INFO: 用例--【不输入手机号】---执行通过
+2020-12-22 21:13:42,468 - [test_register.py-->line:52] - INFO: 用例--【手机号长度10位】---执行通过
+2020-12-22 21:13:42,525 - [test_register.py-->line:52] - INFO: 用例--【手机号长度12位】---执行通过
+2020-12-22 21:13:42,572 - [test_register.py-->line:52] - INFO: 用例--【手机号含有非法字符】---执行通过
+2020-12-22 21:13:42,851 - [test_register.py-->line:52] - INFO: 用例--【已注册过的手机号】---执行通过
+2020-12-22 21:13:42,908 - [test_register.py-->line:52] - INFO: 用例--【密码7位】---执行通过
+2020-12-22 21:13:42,962 - [test_register.py-->line:52] - INFO: 用例--【密码17位】---执行通过
+2020-12-22 21:13:43,010 - [test_register.py-->line:52] - INFO: 用例--【不输入密码】---执行通过
+2020-12-22 21:13:43,053 - [test_register.py-->line:52] - INFO: 用例--【注册名11位】---执行通过
+2020-12-22 21:13:43,105 - [test_register.py-->line:52] - INFO: 用例--【类型输入非0，1内容】---执行通过
+2020-12-22 21:13:43,356 - [test_register.py-->line:47] - ERROR: 用例--【不输入类型】---执行失败
+2020-12-22 21:13:43,356 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:16:17,378 - [test_login.py-->line:53] - INFO: 用例--【登录成功】---执行通过
+2020-12-22 21:16:17,429 - [test_login.py-->line:53] - INFO: 用例--【手机号为空】---执行通过
+2020-12-22 21:16:17,471 - [test_login.py-->line:53] - INFO: 用例--【密码为空】---执行通过
+2020-12-22 21:16:17,743 - [test_login.py-->line:53] - INFO: 用例--【手机号未注册】---执行通过
+2020-12-22 21:16:17,998 - [test_login.py-->line:53] - INFO: 用例--【密码错误】---执行通过
+2020-12-22 21:16:18,050 - [test_login.py-->line:53] - INFO: 用例--【手机号格式错误】---执行通过
+2020-12-22 21:16:18,384 - [test_recharge.py-->line:74] - INFO: 用例--【充值成功】---执行通过
+2020-12-22 21:16:18,431 - [test_recharge.py-->line:70] - ERROR: 用例--【id错误】---执行失败
+2020-12-22 21:16:18,431 - [test_recharge.py-->line:71] - ERROR: 0 != 1007
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 1007
+2020-12-22 21:16:18,473 - [test_recharge.py-->line:70] - ERROR: 用例--【不输入id】---执行失败
+2020-12-22 21:16:18,474 - [test_recharge.py-->line:71] - ERROR: 0 != 1
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 1
+2020-12-22 21:16:18,534 - [test_recharge.py-->line:70] - ERROR: 用例--【不输入金额】---执行失败
+2020-12-22 21:16:18,534 - [test_recharge.py-->line:71] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:16:18,586 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额为负数】---执行失败
+2020-12-22 21:16:18,587 - [test_recharge.py-->line:71] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:16:18,634 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额为500001】---执行失败
+2020-12-22 21:16:18,634 - [test_recharge.py-->line:71] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:16:18,695 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额非数字】---执行失败
+2020-12-22 21:16:18,701 - [test_recharge.py-->line:71] - ERROR: '数字格式化异常' != '余额必须为数值型'
+- 数字格式化异常
++ 余额必须为数值型
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '数字格式化异常' != '余额必须为数值型'
+- 数字格式化异常
++ 余额必须为数值型
+
+2020-12-22 21:16:18,760 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额小数点3位】---执行失败
+2020-12-22 21:16:18,760 - [test_recharge.py-->line:71] - ERROR: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+
+2020-12-22 21:16:19,063 - [test_register.py-->line:47] - ERROR: 用例--【注册成功-带注册名】---执行失败
+2020-12-22 21:16:19,064 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:16:19,316 - [test_register.py-->line:47] - ERROR: 用例--【成功-不带用户名】---执行失败
+2020-12-22 21:16:19,317 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:16:19,388 - [test_register.py-->line:52] - INFO: 用例--【不输入手机号】---执行通过
+2020-12-22 21:16:19,438 - [test_register.py-->line:52] - INFO: 用例--【手机号长度10位】---执行通过
+2020-12-22 21:16:19,478 - [test_register.py-->line:52] - INFO: 用例--【手机号长度12位】---执行通过
+2020-12-22 21:16:19,520 - [test_register.py-->line:52] - INFO: 用例--【手机号含有非法字符】---执行通过
+2020-12-22 21:16:19,791 - [test_register.py-->line:52] - INFO: 用例--【已注册过的手机号】---执行通过
+2020-12-22 21:16:19,838 - [test_register.py-->line:52] - INFO: 用例--【密码7位】---执行通过
+2020-12-22 21:16:19,895 - [test_register.py-->line:52] - INFO: 用例--【密码17位】---执行通过
+2020-12-22 21:16:19,946 - [test_register.py-->line:52] - INFO: 用例--【不输入密码】---执行通过
+2020-12-22 21:16:19,999 - [test_register.py-->line:52] - INFO: 用例--【注册名11位】---执行通过
+2020-12-22 21:16:20,057 - [test_register.py-->line:52] - INFO: 用例--【类型输入非0，1内容】---执行通过
+2020-12-22 21:16:20,324 - [test_register.py-->line:47] - ERROR: 用例--【不输入类型】---执行失败
+2020-12-22 21:16:20,325 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:21:27,077 - [test_login.py-->line:53] - INFO: 用例--【登录成功】---执行通过
+2020-12-22 21:21:27,130 - [test_login.py-->line:53] - INFO: 用例--【手机号为空】---执行通过
+2020-12-22 21:21:27,169 - [test_login.py-->line:53] - INFO: 用例--【密码为空】---执行通过
+2020-12-22 21:21:27,420 - [test_login.py-->line:53] - INFO: 用例--【手机号未注册】---执行通过
+2020-12-22 21:21:27,692 - [test_login.py-->line:53] - INFO: 用例--【密码错误】---执行通过
+2020-12-22 21:21:27,745 - [test_login.py-->line:53] - INFO: 用例--【手机号格式错误】---执行通过
+2020-12-22 21:21:28,061 - [test_recharge.py-->line:74] - INFO: 用例--【充值成功】---执行通过
+2020-12-22 21:21:28,119 - [test_recharge.py-->line:74] - INFO: 用例--【id错误】---执行通过
+2020-12-22 21:21:28,176 - [test_recharge.py-->line:70] - ERROR: 用例--【不输入金额】---执行失败
+2020-12-22 21:21:28,177 - [test_recharge.py-->line:71] - ERROR: 1 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 1 != 2
+2020-12-22 21:21:28,223 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额为负数】---执行失败
+2020-12-22 21:21:28,223 - [test_recharge.py-->line:71] - ERROR: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+
+2020-12-22 21:21:28,267 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额为500001】---执行失败
+2020-12-22 21:21:28,267 - [test_recharge.py-->line:71] - ERROR: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+
+2020-12-22 21:21:28,321 - [test_recharge.py-->line:74] - INFO: 用例--【充值金额非数字】---执行通过
+2020-12-22 21:21:28,361 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额小数点3位】---执行失败
+2020-12-22 21:21:28,361 - [test_recharge.py-->line:71] - ERROR: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+
+2020-12-22 21:21:28,626 - [test_register.py-->line:47] - ERROR: 用例--【注册成功-带注册名】---执行失败
+2020-12-22 21:21:28,627 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:21:28,907 - [test_register.py-->line:47] - ERROR: 用例--【成功-不带用户名】---执行失败
+2020-12-22 21:21:28,908 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:21:28,970 - [test_register.py-->line:52] - INFO: 用例--【不输入手机号】---执行通过
+2020-12-22 21:21:29,025 - [test_register.py-->line:52] - INFO: 用例--【手机号长度10位】---执行通过
+2020-12-22 21:21:29,071 - [test_register.py-->line:52] - INFO: 用例--【手机号长度12位】---执行通过
+2020-12-22 21:21:29,124 - [test_register.py-->line:52] - INFO: 用例--【手机号含有非法字符】---执行通过
+2020-12-22 21:21:29,420 - [test_register.py-->line:52] - INFO: 用例--【已注册过的手机号】---执行通过
+2020-12-22 21:21:29,472 - [test_register.py-->line:52] - INFO: 用例--【密码7位】---执行通过
+2020-12-22 21:21:29,513 - [test_register.py-->line:52] - INFO: 用例--【密码17位】---执行通过
+2020-12-22 21:21:29,560 - [test_register.py-->line:52] - INFO: 用例--【不输入密码】---执行通过
+2020-12-22 21:21:29,611 - [test_register.py-->line:52] - INFO: 用例--【注册名11位】---执行通过
+2020-12-22 21:21:29,664 - [test_register.py-->line:52] - INFO: 用例--【类型输入非0，1内容】---执行通过
+2020-12-22 21:21:29,939 - [test_register.py-->line:47] - ERROR: 用例--【不输入类型】---执行失败
+2020-12-22 21:21:29,939 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:25:35,230 - [test_login.py-->line:53] - INFO: 用例--【登录成功】---执行通过
+2020-12-22 21:25:35,283 - [test_login.py-->line:53] - INFO: 用例--【手机号为空】---执行通过
+2020-12-22 21:25:35,321 - [test_login.py-->line:53] - INFO: 用例--【密码为空】---执行通过
+2020-12-22 21:25:35,570 - [test_login.py-->line:53] - INFO: 用例--【手机号未注册】---执行通过
+2020-12-22 21:25:35,857 - [test_login.py-->line:53] - INFO: 用例--【密码错误】---执行通过
+2020-12-22 21:25:35,908 - [test_login.py-->line:53] - INFO: 用例--【手机号格式错误】---执行通过
+2020-12-22 21:25:36,234 - [test_recharge.py-->line:74] - INFO: 用例--【充值成功】---执行通过
+2020-12-22 21:25:36,286 - [test_recharge.py-->line:74] - INFO: 用例--【id错误】---执行通过
+2020-12-22 21:25:36,324 - [test_recharge.py-->line:74] - INFO: 用例--【不输入id】---执行通过
+2020-12-22 21:25:36,379 - [test_recharge.py-->line:70] - ERROR: 用例--【不输入金额】---执行失败
+2020-12-22 21:25:36,379 - [test_recharge.py-->line:71] - ERROR: 1 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 1 != 2
+2020-12-22 21:25:36,434 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额为负数】---执行失败
+2020-12-22 21:25:36,434 - [test_recharge.py-->line:71] - ERROR: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+
+2020-12-22 21:25:36,479 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额为500001】---执行失败
+2020-12-22 21:25:36,479 - [test_recharge.py-->line:71] - ERROR: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+
+2020-12-22 21:25:36,519 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额非数字】---执行失败
+2020-12-22 21:25:36,519 - [test_recharge.py-->line:71] - ERROR: '金额必须为数值型' != '余额必须为数值型'
+- 金额必须为数值型
+? ^
++ 余额必须为数值型
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须为数值型' != '余额必须为数值型'
+- 金额必须为数值型
+? ^
++ 余额必须为数值型
+? ^
+
+2020-12-22 21:25:36,578 - [test_recharge.py-->line:70] - ERROR: 用例--【充值金额小数点3位】---执行失败
+2020-12-22 21:25:36,578 - [test_recharge.py-->line:71] - ERROR: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 68, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+
+2020-12-22 21:25:36,842 - [test_register.py-->line:47] - ERROR: 用例--【注册成功-带注册名】---执行失败
+2020-12-22 21:25:36,842 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:25:37,107 - [test_register.py-->line:47] - ERROR: 用例--【成功-不带用户名】---执行失败
+2020-12-22 21:25:37,107 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:25:37,152 - [test_register.py-->line:52] - INFO: 用例--【不输入手机号】---执行通过
+2020-12-22 21:25:37,196 - [test_register.py-->line:52] - INFO: 用例--【手机号长度10位】---执行通过
+2020-12-22 21:25:37,233 - [test_register.py-->line:52] - INFO: 用例--【手机号长度12位】---执行通过
+2020-12-22 21:25:37,285 - [test_register.py-->line:52] - INFO: 用例--【手机号含有非法字符】---执行通过
+2020-12-22 21:25:37,633 - [test_register.py-->line:52] - INFO: 用例--【已注册过的手机号】---执行通过
+2020-12-22 21:25:37,685 - [test_register.py-->line:52] - INFO: 用例--【密码7位】---执行通过
+2020-12-22 21:25:37,730 - [test_register.py-->line:52] - INFO: 用例--【密码17位】---执行通过
+2020-12-22 21:25:37,790 - [test_register.py-->line:52] - INFO: 用例--【不输入密码】---执行通过
+2020-12-22 21:25:37,839 - [test_register.py-->line:52] - INFO: 用例--【注册名11位】---执行通过
+2020-12-22 21:25:37,895 - [test_register.py-->line:52] - INFO: 用例--【类型输入非0，1内容】---执行通过
+2020-12-22 21:25:38,162 - [test_register.py-->line:47] - ERROR: 用例--【不输入类型】---执行失败
+2020-12-22 21:25:38,162 - [test_register.py-->line:48] - ERROR: 0 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_register.py", line 43, in test_register
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 2
+2020-12-22 21:39:27,726 - [test_register.py-->line:56] - INFO: 用例--【注册成功-带注册名】---执行通过
+2020-12-22 21:39:27,986 - [test_register.py-->line:56] - INFO: 用例--【成功-不带用户名】---执行通过
+2020-12-22 21:39:28,030 - [test_register.py-->line:56] - INFO: 用例--【不输入手机号】---执行通过
+2020-12-22 21:39:28,088 - [test_register.py-->line:56] - INFO: 用例--【手机号长度10位】---执行通过
+2020-12-22 21:39:28,147 - [test_register.py-->line:56] - INFO: 用例--【手机号长度12位】---执行通过
+2020-12-22 21:39:28,205 - [test_register.py-->line:56] - INFO: 用例--【手机号含有非法字符】---执行通过
+2020-12-22 21:39:28,463 - [test_register.py-->line:56] - INFO: 用例--【已注册过的手机号】---执行通过
+2020-12-22 21:39:28,504 - [test_register.py-->line:56] - INFO: 用例--【密码7位】---执行通过
+2020-12-22 21:39:28,565 - [test_register.py-->line:56] - INFO: 用例--【密码17位】---执行通过
+2020-12-22 21:39:28,625 - [test_register.py-->line:56] - INFO: 用例--【不输入密码】---执行通过
+2020-12-22 21:39:28,683 - [test_register.py-->line:56] - INFO: 用例--【注册名11位】---执行通过
+2020-12-22 21:39:28,743 - [test_register.py-->line:56] - INFO: 用例--【类型输入非0，1内容】---执行通过
+2020-12-22 21:39:29,010 - [test_register.py-->line:56] - INFO: 用例--【不输入类型】---执行通过
+2020-12-22 21:39:39,254 - [test_register.py-->line:56] - INFO: 用例--【注册成功-带注册名】---执行通过
+2020-12-22 21:39:39,516 - [test_register.py-->line:56] - INFO: 用例--【成功-不带用户名】---执行通过
+2020-12-22 21:39:39,556 - [test_register.py-->line:56] - INFO: 用例--【不输入手机号】---执行通过
+2020-12-22 21:39:39,596 - [test_register.py-->line:56] - INFO: 用例--【手机号长度10位】---执行通过
+2020-12-22 21:39:39,640 - [test_register.py-->line:56] - INFO: 用例--【手机号长度12位】---执行通过
+2020-12-22 21:39:39,694 - [test_register.py-->line:56] - INFO: 用例--【手机号含有非法字符】---执行通过
+2020-12-22 21:39:39,954 - [test_register.py-->line:56] - INFO: 用例--【已注册过的手机号】---执行通过
+2020-12-22 21:39:39,995 - [test_register.py-->line:56] - INFO: 用例--【密码7位】---执行通过
+2020-12-22 21:39:40,043 - [test_register.py-->line:56] - INFO: 用例--【密码17位】---执行通过
+2020-12-22 21:39:40,105 - [test_register.py-->line:56] - INFO: 用例--【不输入密码】---执行通过
+2020-12-22 21:39:40,162 - [test_register.py-->line:56] - INFO: 用例--【注册名11位】---执行通过
+2020-12-22 21:39:40,215 - [test_register.py-->line:56] - INFO: 用例--【类型输入非0，1内容】---执行通过
+2020-12-22 21:39:40,500 - [test_register.py-->line:56] - INFO: 用例--【不输入类型】---执行通过
+2020-12-22 21:42:37,314 - [test_login.py-->line:53] - INFO: 用例--【登录成功】---执行通过
+2020-12-22 21:42:37,354 - [test_login.py-->line:53] - INFO: 用例--【手机号为空】---执行通过
+2020-12-22 21:42:37,391 - [test_login.py-->line:53] - INFO: 用例--【密码为空】---执行通过
+2020-12-22 21:42:37,643 - [test_login.py-->line:53] - INFO: 用例--【手机号未注册】---执行通过
+2020-12-22 21:42:37,914 - [test_login.py-->line:53] - INFO: 用例--【密码错误】---执行通过
+2020-12-22 21:42:37,953 - [test_login.py-->line:53] - INFO: 用例--【手机号格式错误】---执行通过
+2020-12-22 21:42:38,285 - [test_recharge.py-->line:73] - INFO: 用例--【充值成功】---执行通过
+2020-12-22 21:42:38,327 - [test_recharge.py-->line:73] - INFO: 用例--【id错误】---执行通过
+2020-12-22 21:42:38,373 - [test_recharge.py-->line:73] - INFO: 用例--【不输入id】---执行通过
+2020-12-22 21:42:38,413 - [test_recharge.py-->line:69] - ERROR: 用例--【不输入金额】---执行失败
+2020-12-22 21:42:38,413 - [test_recharge.py-->line:70] - ERROR: 1 != 2
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 66, in test_recharge
+    self.assertEqual(expected['code'], res['code'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 832, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 1 != 2
+2020-12-22 21:42:38,467 - [test_recharge.py-->line:69] - ERROR: 用例--【充值金额为负数】---执行失败
+2020-12-22 21:42:38,468 - [test_recharge.py-->line:70] - ERROR: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+
+2020-12-22 21:42:38,523 - [test_recharge.py-->line:69] - ERROR: 用例--【充值金额为500001】---执行失败
+2020-12-22 21:42:38,524 - [test_recharge.py-->line:70] - ERROR: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须大于0并且小于或者等于500000' != '余额必须大于0并且小于或者等于500000'
+- 金额必须大于0并且小于或者等于500000
+? ^
++ 余额必须大于0并且小于或者等于500000
+? ^
+
+2020-12-22 21:42:38,586 - [test_recharge.py-->line:69] - ERROR: 用例--【充值金额非数字】---执行失败
+2020-12-22 21:42:38,586 - [test_recharge.py-->line:70] - ERROR: '金额必须为数值型' != '余额必须为数值型'
+- 金额必须为数值型
+? ^
++ 余额必须为数值型
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额必须为数值型' != '余额必须为数值型'
+- 金额必须为数值型
+? ^
++ 余额必须为数值型
+? ^
+
+2020-12-22 21:42:38,642 - [test_recharge.py-->line:69] - ERROR: 用例--【充值金额小数点3位】---执行失败
+2020-12-22 21:42:38,642 - [test_recharge.py-->line:70] - ERROR: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_21day_project\testcases\test_recharge.py", line 67, in test_recharge
+    self.assertEqual(expected['msg'], res['msg'])
+  File "C:\python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\python37\lib\unittest\case.py", line 1220, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: '金额小数超过两位' != '余额小数超过两位'
+- 金额小数超过两位
+? ^
++ 余额小数超过两位
+? ^
+
+2020-12-22 21:42:38,934 - [test_register.py-->line:58] - INFO: 用例--【注册成功-带注册名】---执行通过
+2020-12-22 21:42:39,206 - [test_register.py-->line:58] - INFO: 用例--【成功-不带用户名】---执行通过
+2020-12-22 21:42:39,258 - [test_register.py-->line:58] - INFO: 用例--【不输入手机号】---执行通过
+2020-12-22 21:42:39,295 - [test_register.py-->line:58] - INFO: 用例--【手机号长度10位】---执行通过
+2020-12-22 21:42:39,340 - [test_register.py-->line:58] - INFO: 用例--【手机号长度12位】---执行通过
+2020-12-22 21:42:39,381 - [test_register.py-->line:58] - INFO: 用例--【手机号含有非法字符】---执行通过
+2020-12-22 21:42:39,636 - [test_register.py-->line:58] - INFO: 用例--【已注册过的手机号】---执行通过
+2020-12-22 21:42:39,678 - [test_register.py-->line:58] - INFO: 用例--【密码7位】---执行通过
+2020-12-22 21:42:39,714 - [test_register.py-->line:58] - INFO: 用例--【密码17位】---执行通过
+2020-12-22 21:42:39,755 - [test_register.py-->line:58] - INFO: 用例--【不输入密码】---执行通过
+2020-12-22 21:42:39,796 - [test_register.py-->line:58] - INFO: 用例--【注册名11位】---执行通过
+2020-12-22 21:42:39,834 - [test_register.py-->line:58] - INFO: 用例--【类型输入非0，1内容】---执行通过
+2020-12-22 21:42:40,102 - [test_register.py-->line:58] - INFO: 用例--【不输入类型】---执行通过

@@ -1,0 +1,33 @@
+F testcase/test_demo3.py::TestDome999::test_demo888[11]
+ self = <test_demo3.TestDome999 object at 0x0D0950F0>, item = 11
+ 
+     @pytest.mark.parametrize('item', cases)
+     def test_demo888(self, item):
+ >       assert item > 20
+ E       assert 11 > 20
+ 
+ testcase\test_demo3.py:27: AssertionError
+. testcase/test_demo3.py::TestDome999::test_demo888[22]
+. testcase/test_demo3.py::TestDome999::test_demo888[330]
+F testcase/test_demo3.py::TestDome999::test_demo888[4]
+ self = <test_demo3.TestDome999 object at 0x0D0DC750>, item = 4
+ 
+     @pytest.mark.parametrize('item', cases)
+     def test_demo888(self, item):
+ >       assert item > 20
+ E       assert 4 > 20
+ 
+ testcase\test_demo3.py:27: AssertionError
+F testcase/test_demo3.py::TestDome999::test_demo888[2]
+ self = <test_demo3.TestDome999 object at 0x0D1460D0>, item = 2
+ 
+     @pytest.mark.parametrize('item', cases)
+     def test_demo888(self, item):
+ >       assert item > 20
+ E       assert 2 > 20
+ 
+ testcase\test_demo3.py:27: AssertionError
+. testcase/test_demo3.py::TestDome999::test_demo888[440]
+. testcase/test_demo3.py::TestDome999::test_demo888[112]
+. testcase/test_demo3.py::TestDome999::test_demo888[331]
+. testcase/test_demo3.py::TestDome999::test_demo888[441]

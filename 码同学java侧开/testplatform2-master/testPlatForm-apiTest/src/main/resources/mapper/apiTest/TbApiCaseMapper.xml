@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.matongxue.apiTest.mapper.TbApiCaseMapper">
+    
+    <resultMap type="TbApiCase" id="TbApiCaseResult">
+        <result property="id"    column="id"    />
+        <result property="run"    column="run"    />
+        <result property="apiName"    column="api_name"    />
+        <result property="url"    column="url"    />
+        <result property="type"    column="type"    />
+        <result property="body"    column="body"    />
+        <result property="headers"    column="headers"    />
+        <result property="business"    column="business"    />
+        <result property="correlation"    column="correlation"    />
+        <result property="correlationType"    column="correlation_type"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectTbApiCaseVo">
+        select id, run, api_name, url, type, body, headers, business, correlation, correlation_type, create_by, create_time from tb_api_case
+    </sql>
+
+    <select id="selectTbApiCaseList" parameterType="TbApiCase" resultMap="TbApiCaseResult">
+        <include refid="selectTbApiCaseVo"/>
+        <where>  
+            <if test="run != null "> and run = #{run}</if>
+            <if test="apiName != null  and apiName != ''"> and api_name like concat('%', #{apiName}, '%')</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="body != null  and body != ''"> and body = #{body}</if>
+            <if test="headers != null  and headers != ''"> and headers = #{headers}</if>
+            <if test="business != null  and business != ''"> and business = #{business}</if>
+            <if test="correlation != null  and correlation != ''"> and correlation = #{correlation}</if>
+            <if test="correlationType != null  and correlationType != ''"> and correlation_type = #{correlationType}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbApiCaseById" parameterType="Long" resultMap="TbApiCaseResult">
+        <include refid="selectTbApiCaseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbApiCase" parameterType="TbApiCase" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_api_case
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="run != null">run,</if>
+            <if test="apiName != null and apiName != ''">api_name,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="body != null">body,</if>
+            <if test="headers != null">headers,</if>
+            <if test="business != null">business,</if>
+            <if test="correlation != null">correlation,</if>
+            <if test="correlationType != null">correlation_type,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="run != null">#{run},</if>
+            <if test="apiName != null and apiName != ''">#{apiName},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="body != null">#{body},</if>
+            <if test="headers != null">#{headers},</if>
+            <if test="business != null">#{business},</if>
+            <if test="correlation != null">#{correlation},</if>
+            <if test="correlationType != null">#{correlationType},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbApiCase" parameterType="TbApiCase">
+        update tb_api_case
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="run != null">run = #{run},</if>
+            <if test="apiName != null and apiName != ''">api_name = #{apiName},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="body != null">body = #{body},</if>
+            <if test="headers != null">headers = #{headers},</if>
+            <if test="business != null">business = #{business},</if>
+            <if test="correlation != null">correlation = #{correlation},</if>
+            <if test="correlationType != null">correlation_type = #{correlationType},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbApiCaseById" parameterType="Long">
+        delete from tb_api_case where id = #{id}
+    </delete>
+
+    <delete id="deleteTbApiCaseByIds" parameterType="String">
+        delete from tb_api_case where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

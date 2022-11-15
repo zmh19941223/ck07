@@ -1,0 +1,188 @@
+2021-02-23 20:44:34,693 - [base_page.py-->line:80] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 20:44:34,929 - [base_page.py-->line:80] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 20:44:35,052 - [base_page.py-->line:63] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 20:44:45,059 - [test_login.py-->line:64] - ERROR: 【登录成功的用例】————>执行失败
+2021-02-23 20:44:45,059 - [test_login.py-->line:65] - ERROR: assert False == True
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\testcases\test_login.py", line 62, in test_login_success
+    assert res == True
+AssertionError: assert False == True
+2021-02-23 20:44:51,143 - [base_page.py-->line:80] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 20:44:51,218 - [base_page.py-->line:80] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 20:44:51,356 - [base_page.py-->line:63] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 20:44:51,403 - [test_login.py-->line:88] - INFO: ————>执行通过
+2021-02-23 20:44:59,039 - [base_page.py-->line:80] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 20:44:59,170 - [base_page.py-->line:80] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 20:44:59,279 - [base_page.py-->line:63] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 20:44:59,383 - [test_login.py-->line:84] - ERROR: ————>执行失败
+2021-02-23 20:44:59,384 - [test_login.py-->line:85] - ERROR: assert '密码错误, 你还可以尝试3次' == '密码不能为空'
+  - 密码不能为空
+  + 密码错误, 你还可以尝试3次
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\testcases\test_login.py", line 82, in test_login_error
+    assert res == case['expected']
+AssertionError: assert '密码错误, 你还可以尝试3次' == '密码不能为空'
+  - 密码不能为空
+  + 密码错误, 你还可以尝试3次
+2021-02-23 21:35:01,731 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:35:01,902 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:35:02,025 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:36:03,485 - [test_login.py-->line:68] - INFO: 【登录成功的用例】————>执行通过
+2021-02-23 21:36:09,675 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:36:09,976 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:36:10,097 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:36:10,148 - [base_page.py-->line:130] - INFO: 查找元素--【登录页面_登录的错误提示】--成功
+2021-02-23 21:36:10,148 - [test_login.py-->line:88] - INFO: ————>执行通过
+2021-02-23 21:36:16,644 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:36:16,781 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:36:16,897 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:36:16,937 - [base_page.py-->line:130] - INFO: 查找元素--【登录页面_登录的错误提示】--成功
+2021-02-23 21:36:16,937 - [test_login.py-->line:88] - INFO: ————>执行通过
+2021-02-23 21:37:21,280 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:37:21,525 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:37:21,637 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:38:23,014 - [test_login.py-->line:68] - INFO: 【登录成功的用例】————>执行通过
+2021-02-23 21:38:28,855 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:38:29,018 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:38:29,133 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:38:39,200 - [base_page.py-->line:125] - ERROR: 查找元素--【登录页面_登录的错误提示】--失败
+2021-02-23 21:38:39,201 - [base_page.py-->line:126] - ERROR: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\common\base_page.py", line 123, in get_element_text
+    text = self.driver.find_element(*loc).text
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+
+2021-02-23 21:38:40,327 - [base_page.py-->line:263] - INFO: 对-【登录页面_登录的错误提示】--操作进行截图--成功
+2021-02-23 21:38:48,122 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:38:48,226 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:38:48,357 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:38:58,428 - [base_page.py-->line:125] - ERROR: 查找元素--【登录页面_登录的错误提示】--失败
+2021-02-23 21:38:58,428 - [base_page.py-->line:126] - ERROR: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\common\base_page.py", line 123, in get_element_text
+    text = self.driver.find_element(*loc).text
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+
+2021-02-23 21:38:59,840 - [base_page.py-->line:263] - INFO: 对-【登录页面_登录的错误提示】--操作进行截图--成功
+2021-02-23 21:40:24,582 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:40:24,822 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:40:24,995 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:40:35,040 - [base_page.py-->line:125] - ERROR: 查找元素--【登录页面_登录的错误提示】--失败
+2021-02-23 21:40:35,041 - [base_page.py-->line:126] - ERROR: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\common\base_page.py", line 123, in get_element_text
+    text = self.driver.find_element(*loc).text
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+
+2021-02-23 21:40:36,054 - [base_page.py-->line:263] - INFO: 对-【登录页面_登录的错误提示】--操作进行截图--成功
+2021-02-23 21:40:36,054 - [base_page.py-->line:264] - INFO: 图片名为
+2021-02-23 21:40:42,343 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:40:42,496 - [base_page.py-->line:96] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:40:42,610 - [base_page.py-->line:78] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:40:52,635 - [base_page.py-->line:125] - ERROR: 查找元素--【登录页面_登录的错误提示】--失败
+2021-02-23 21:40:52,635 - [base_page.py-->line:126] - ERROR: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\common\base_page.py", line 123, in get_element_text
+    text = self.driver.find_element(*loc).text
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+
+2021-02-23 21:40:53,616 - [base_page.py-->line:263] - INFO: 对-【登录页面_登录的错误提示】--操作进行截图--成功
+2021-02-23 21:40:53,616 - [base_page.py-->line:264] - INFO: 图片名为
+2021-02-23 21:54:53,842 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:54:54,003 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:54:54,200 - [base_page.py-->line:82] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:54:55,133 - [base_page.py-->line:82] - INFO: 点击元素--【首页_学生加入课程】--成功
+2021-02-23 21:54:55,221 - [base_page.py-->line:100] - INFO: 往输入框--【首页_学生输入加课码】--输入值成功
+2021-02-23 21:54:55,316 - [base_page.py-->line:82] - INFO: 点击元素--【首页_学生加入课程的加入按钮】--成功
+2021-02-23 21:54:55,663 - [base_page.py-->line:64] - INFO: 查找元素--【首页_查找课程】--成功
+2021-02-23 21:55:01,747 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:55:01,888 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:55:01,999 - [base_page.py-->line:82] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:55:02,890 - [base_page.py-->line:82] - INFO: 点击元素--【首页_学生加入课程】--成功
+2021-02-23 21:55:02,964 - [base_page.py-->line:100] - INFO: 往输入框--【首页_学生输入加课码】--输入值成功
+2021-02-23 21:55:03,073 - [base_page.py-->line:82] - INFO: 点击元素--【首页_学生加入课程的加入按钮】--成功
+2021-02-23 21:55:03,099 - [base_page.py-->line:173] - INFO: 等待元素可见--【首页_加课失败的错误提示】--成功
+2021-02-23 21:55:06,897 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:55:07,218 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:55:07,421 - [base_page.py-->line:82] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:55:08,393 - [base_page.py-->line:82] - INFO: 点击元素--【首页_学生加入课程】--成功
+2021-02-23 21:55:08,516 - [base_page.py-->line:100] - INFO: 往输入框--【首页_学生输入加课码】--输入值成功
+2021-02-23 21:55:09,250 - [base_page.py-->line:82] - INFO: 点击元素--【首页_学生加入课程的加入按钮】--成功
+2021-02-23 21:55:09,369 - [base_page.py-->line:173] - INFO: 等待元素可见--【首页_加课失败的错误提示】--成功
+2021-02-23 21:55:13,748 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:55:13,932 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:55:14,086 - [base_page.py-->line:82] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:55:15,056 - [base_page.py-->line:64] - INFO: 查找元素--【首页_获取用户头像】--成功
+2021-02-23 21:55:15,056 - [test_login.py-->line:68] - INFO: 【登录成功的用例】————>执行通过
+2021-02-23 21:55:21,566 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:55:21,803 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:55:21,966 - [base_page.py-->line:82] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:55:32,029 - [base_page.py-->line:129] - ERROR: 查找元素--【登录页面_登录的错误提示】--失败
+2021-02-23 21:55:32,030 - [base_page.py-->line:130] - ERROR: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\common\base_page.py", line 127, in get_element_text
+    text = self.driver.find_element(*loc).text
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+
+2021-02-23 21:55:33,088 - [base_page.py-->line:267] - INFO: 对-【登录页面_登录的错误提示】--操作进行截图--成功
+2021-02-23 21:55:33,088 - [base_page.py-->line:268] - INFO: 图片名为C:\project\python_35\py35_web_test\web_12day_project\error_images\2021-02-23_21_55_32_登录页面_登录的错误提示.png
+2021-02-23 21:55:39,750 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_账号输入】--输入值成功
+2021-02-23 21:55:39,875 - [base_page.py-->line:100] - INFO: 往输入框--【登录页面_密码输入】--输入值成功
+2021-02-23 21:55:40,023 - [base_page.py-->line:82] - INFO: 点击元素--【登录页面_登录按钮】--成功
+2021-02-23 21:55:50,040 - [base_page.py-->line:129] - ERROR: 查找元素--【登录页面_登录的错误提示】--失败
+2021-02-23 21:55:50,041 - [base_page.py-->line:130] - ERROR: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+Traceback (most recent call last):
+  File "C:\project\python_35\py35_web_test\web_12day_project\common\base_page.py", line 127, in get_element_text
+    text = self.driver.find_element(*loc).text
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\python37\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//p[@class="error-tips77"]"}
+  (Session info: chrome=88.0.4324.104)
+
+2021-02-23 21:55:51,426 - [base_page.py-->line:267] - INFO: 对-【登录页面_登录的错误提示】--操作进行截图--成功
+2021-02-23 21:55:51,426 - [base_page.py-->line:268] - INFO: 图片名为C:\project\python_35\py35_web_test\web_12day_project\error_images\2021-02-23_21_55_50_登录页面_登录的错误提示.png

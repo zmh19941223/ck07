@@ -1,0 +1,5 @@
+INFO     mylog:base_page.py:100 往输入框--【登录页面_账号输入】--输入值成功
+INFO     mylog:base_page.py:100 往输入框--【登录页面_密码输入】--输入值成功
+INFO     mylog:base_page.py:82 点击元素--【登录页面_登录按钮】--成功
+INFO     mylog:base_page.py:64 查找元素--【首页_获取用户头像】--成功
+INFO     mylog:test_login.py:68 【登录成功的用例】————>执行通过

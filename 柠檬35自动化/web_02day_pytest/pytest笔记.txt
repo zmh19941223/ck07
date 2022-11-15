@@ -1,0 +1,110 @@
+一、 pytest默认的用例规范
+    1、用例文件：test开头
+    2、以test开头的函数会当成一条测试用例
+    3、以Test开头的类，会当成测试用例类
+        测试类中，以test开头的方法，会当成一条用例
+
+    # 注意点：用例规范可以自己通过pytest.ini去配置
+
+
+二、测试类的前后置方法
+方式一：
+    1、用例级别的：setup 和teardown
+    2、测试类级别的前后置方法：setup_class 和teardown_class  (类方法)
+
+方式二：pytest.fixture
+    定义：
+        1、@pytest.fixture(scope='function')定义用例级别的前后置方法
+        2、@pytest.fixture(scope='class')定义类级别的前后置方法
+    调用：
+        1、在用例方法的参数中，写上前后置的方法名
+        2、在定义前后置方法的时候(设置参数autouse=True)，可以设置为自动执行  （用的比较少）
+
+    注意点：前后置方法可以统一放到conftest.py文件中（用例文件中直接使用，不需要导入）
+    其他的前后置方法（扩展）： 包级别  模块级别  会话级别（项目阶段再讲）
+
+
+三、pytest用例执行的顺序，同一个文件按照用例文件中代码的前后顺序，（多个文件：根据文件名按ASCII码排序）
+
+
+
+四、用例打标签：pytest.mark
+
+    1、在pytest.ini文件中markers这个配置项中注册标签
+
+    2、给用例加标签
+        1、通过@pytest.mark.标签名，给单条用例加标签
+        2、pytestmark = [pytest.mark.musen]，给测试类中所有的用例加标签
+
+    3、通过标签筛选用例执行
+        1、pytest -m 标签名
+        2、pytest.main(['-m', '标签名'])
+
+        扩展：筛选多个标签（and  or  not）：
+            pytest -m "not musen" : 执行不带有musen这个标签的用例
+            pytest -m "xiaojian or  musen" :  执行带有musen或者xiaojian这个标签的用例
+            pytest -m "xiaojian and  musen" : 执行同时带有musen和xiaojian这个两个标签的用例
+
+    4、内置的标签：
+        skip: 跳过用例
+        skipif: 通过条件来决定是否跳过用例
+
+
+五、用例用运行的方式
+    1、运行方式
+        1、命令行： pytest 参数
+        2、pytest.mian运行,pytest.main(['参数列表'])
+
+    2、通过标签筛选用例
+        1、pytest -m 标签名
+        2、pytest.main(['-m', '标签名'])
+
+    3、筛选执行的用例
+        1、执行指定用例文件： pytest 文件名.py
+
+        2、执行指定测试类： pytest 文件名.py::类名
+
+        3、执行指定测试方法： pytest 文件名.py::类名::用例方法名
+
+        4、执行执行的测试目录 pytest 目录名
+
+六、断言
+    unittest中内置的很多断言的方法，pytest中没有
+
+    pytest中断言 直接使用  assert关键字
+
+
+
+七、 参数化（uniitest中ddt模块的功能）
+    @pytest.mark.parametrize('item', cases)
+
+
+
+八、测试报告（集成allure报告平台）
+    1、下载 Allure，进行解压
+        下载地址https://github.com/allure-framework/allure2/releases
+
+    2、将解压之后的allure中的bin目录路径配置到环境变量(path中)
+
+
+    3、安装allure-pytest插件
+        pip install allure-pytest
+
+
+    4、执行用例的时候加上参数 --alluredir=报告数据存放的路径
+
+
+    5、在命令行中启动allure服务
+        allure serve  报告数据的路径
+
+
+九、用例失败重运行
+    1、安装插件：pip install pytest-rerunfailures
+    2、通过--reruns 指定失败重运行的次数，--reruns-delay 指定失败之后重运行间隔的时间
+        pytest --reruns 3 --reruns-delay 5
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+mysql:
+  name: msuen
+  host: 127.0.0.1
+  port: 3306
+
+logging:
+ level:DEBUG
+  fh_level:DEBUG
+

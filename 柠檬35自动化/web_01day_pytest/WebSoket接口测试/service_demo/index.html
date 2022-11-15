@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+<body>
+
+<div id="app">
+    <div style="width: 70%;margin:auto">
+
+        <div style="height: 50px"></div>
+        <el-divider><h1>websocket实现投票实时同步</h1></el-divider>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>投票排行榜</span>
+
+            </div>
+            <template>
+                <el-table
+                        stripe
+                        :data="users"
+                        style="width: 100%">
+                    <el-table-column
+                            prop="id"
+                            label="编号"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="name"
+                            label="姓名"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="count"
+                            label="票数">
+                    </el-table-column>
+                    <el-table-column label="操作">
+                        <template slot-scope="scope">
+                            <el-button
+                                    size="mini"
+                                    @click="vote(scope.$index, scope.row)">投他一票
+                            </el-button>
+                        </template>
+                    </el-table-column>
+
+                </el-table>
+            </template>
+
+        </el-card>
+
+        <el-divider><i class="el-icon-mobile-phone">最新投票记录：</i></el-divider>
+        <el-timeline :reverse="reverse">
+            <el-timeline-item
+                    v-for="(activity, index) in activities"
+                    :key="index"
+                    :timestamp="activity.timestamp">
+                {{activity.content}}
+            </el-timeline-item>
+        </el-timeline>
+    </div>
+
+
+</div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            users: [],
+            reverse: true,
+            activities: []
+        },
+        mounted: function () {
+            // 加载页面数据
+            this.getUserDate();
+
+            // 建立websocket连接
+            this.ws = new WebSocket('ws://127.0.0.1:5000/vote');
+            // 监听返回数据
+            this.ws.onmessage = (event) => {
+                var response = JSON.parse(event.data);
+                console.log('收到数据：', response);
+                // 更新页面动态
+                const data_ = {content: response.msg, timestamp: response.Time};
+                this.users = response.data;
+                this.activities.push(data_);
+                //  投票提醒
+                this.open1(response.msg);
+
+
+            };
+        },
+        methods: {
+            vote: function (id) {
+                console.log('投票编号为：', id);
+                const params = JSON.stringify({"id": id});
+                this.ws.send(params)
+
+            },
+            getUserDate: function () {
+                // 获取用户数据源
+                axios.get('http://127.0.0.1:5000/users')
+                    .then((response) => {
+                        this.users = response.data;
+                        console.log(this.users);
+                    });
+            },
+            open1: function (context) {
+                const h = this.$createElement;
+                this.$notify({
+                    type: 'success',
+                    title: '投票提醒',
+                    message: h('i', {style: 'color: teal'}, context)
+                });
+            }
+        }
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
